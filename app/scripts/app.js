@@ -24,5 +24,7 @@ angular
 				url: '/',
 				templateUrl: '/views/home.html',
 				controller: 'HomeCtrl'
-			})
+			});
+
+		$urlRouterProvider.otherwise('/');
 	});

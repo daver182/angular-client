@@ -11,7 +11,7 @@ angular.module('seedApp')
 	.controller('HomeCtrl', function ($scope, $http) {
 		$scope.title = 'Home Controller';
 		$http({
-			url: '/test/restricted',
+			url: 'http://rockola-178928.sae1.nitrousbox.com/test/restricted',
 			method: 'GET'
 		}).then(function(response) {
 			$scope.datos = response.data;
