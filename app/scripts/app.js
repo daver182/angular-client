@@ -32,7 +32,7 @@ angular
 			})
 			.state('register', {
 				url: '/register',
-				templateUrl: '/templates/register.html',
+				templateUrl: '/views/register.html',
 				controller: 'RegisterCtrl'
 			})
 	        .state('logout', {
