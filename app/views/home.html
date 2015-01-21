@@ -1,7 +1,18 @@
-<h1>{{title}}</h1>
+<!--<h1>{{title}}</h1>
 <a href="/#login">Login</a>
 <a href="/#register">Register</a>
-<a href="/#logout">Logout</a>
-<ul>
-	<li ng-repeat="dato in datos">{{dato.title}}</li>
-</ul>
+<a href="/#logout">Logout</a>-->
+
+
+<div class="container">
+	<div class="header">
+		<ul class="nav nav-pills pull-right">
+			<li class="active"><a ng-href="#">Home</a></li>
+			<li><a ui-sref="trabajadores">Trabajadores</a></li>
+			<li><a ng-href="#">Contact</a></li>
+		</ul>
+		<h3 class="text-muted">seed</h3>
+	</div>
+
+	<div ui-view></div>
+</div>
