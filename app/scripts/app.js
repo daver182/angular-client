@@ -16,15 +16,23 @@ angular
 		'ngSanitize',
 		'ngTouch',
 		'ui.router',
-		'satellizer'
+		'satellizer',
+		'ngTable'
 	])
 	.config(function ($stateProvider, $urlRouterProvider, $authProvider) {
 		$stateProvider
-			// .state('home', {
-			// 	url: '/',
-			// 	templateUrl: '/views/home.html',
-			// 	controller: 'HomeCtrl'
-			// })
+			.state('home', {
+				abstract: true,
+				templateUrl: '/views/home.html',
+				controller: 'HomeCtrl'
+			})
+			.state('home.main', {
+				url: '/',
+				templateUrl: '/views/main.html',
+				controller: 'MainCtrl'
+			});
+
+		$stateProvider
 			.state('login', {
 				url: '/login',
 				templateUrl: '/views/auth/login.html',
@@ -40,36 +48,28 @@ angular
 				template: null,
 				controller: 'LogoutCtrl'
 			});
-
-		$stateProvider
-			.state('home', {
-				abstract: true,
-				templateURL: 'home.html'
-			})
-			.state('home.main', {
-				url: '/',
-				templateUrl: '/views/main.html',
-				controller: 'MainCtrl'
-			});
 		
-		/*$stateProvider
-			.state('trabajadores', {
+		$stateProvider
+			.state('home.trabajadores', {
 				 url: '/trabajadores',
 				 templateUrl: '/views/trabajador/lista.html',
 				 controller: 'TrabajadoresCtrl'
 			})
-			.state('detalleTrabajador', {
-				url: '/trabajador/detalle/:id',
+			.state('home.detalleTrabajador', {
+				url: '/trabajadores/detalle/:id',
 				templateUrl: '/views/trabajador/detalle.html',
 				controller: 'DetalletrabajadorCtrl'
 			})
-			.state('editarTrabajador', {
-				url: '/trabajador/editar/:id',
-				templateUrl: '/views/trabajador/editar.html',
-				controller: 'EditartrabajadorCtrl'
-			});*/
-
-		$urlRouterProvider.otherwise('/');
+			.state('home.empresas', {
+				 url: '/empresas',
+				 templateUrl: '/views/empresa/lista.html',
+				 controller: 'EmpresaCtrl'
+			})
+			.state('home.detalleEmpresa', {
+				url: '/empresas/detalle/:id',
+				templateUrl: '/views/empresa/detalle.html',
+				controller: 'DetalleempresaCtrl'
+			})
 
 		$authProvider.loginRedirect = '/';
 		$authProvider.logoutRedirect = '/';
@@ -79,7 +79,7 @@ angular
 		$authProvider.loginRoute = '/login';
 		$authProvider.signupRoute = '/register';
 	})
-	.run(function($rootScope, $state, $auth) {
+	/*.run(function($rootScope, $state, $auth) {
 		$rootScope.$on('$stateChangeStart', function(e, toState, toParams, fromState, fromParams) {
 			if(toState.name === 'login' || toState.name === 'register') return;
 			
@@ -88,4 +88,4 @@ angular
 				$state.go('login');
 			}
 		});
-	});
+	});*/

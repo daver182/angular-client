@@ -8,7 +8,8 @@
  * Controller of the seedApp
  */
 angular.module('seedApp')
-	.controller('HomeCtrl', function ($scope, $http) {
-		$scope.title = 'Home Controller';
-		console.log('HomeCtrl');
+	.controller('MainCtrl', function ($scope, $http) {
+		console.log('MainCtrl');
+		$scope.title = 'Main Controller';
+		
 	});
