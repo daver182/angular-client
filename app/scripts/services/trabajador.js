@@ -9,11 +9,12 @@
  */
 angular.module('seedApp').service('Trabajador', function ($resource) {
 	return $resource(
-		'http://crosan-180346.sae1.nitrousbox.com/contratistas/public/trabajador/:id', 
-		{id:'@id'},
+		window.URL + '/trabajador/:id', 
+		{ id:'@id' },
 		{
-			query: {method: 'GET', isArray: false},
-			update: { method: 'PUT', isArray: false }
+			query: { method: 'GET', isArray: false },
+			update: { method: 'PUT', isArray: false },
+			buscar: { method:'GET', isArray: false, url: window.URL + '/trabajador/buscar?rut=:rut' },
 		}
 	);
 });

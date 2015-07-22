@@ -1,2 +1,143 @@
-<h3>{{trabajador.nombres}} {{trabajador.apellidos}}</h3>
-<p>{{trabajador.rut}}</p>
+<style>
+	.required-field{
+		color: #ed3e49;
+	}
+
+	.alerts{
+		margin-top: 20px;
+		margin: 10px auto;
+		margin-bottom: 0;
+	}
+
+	.alerts .alert{
+		margin-bottom: 0;
+	}
+</style>
+
+<div class="row">
+	<div class="col-lg-12">
+		<ol class="breadcrumb">
+			<li><a href="" ui-sref="home.main">Inicio</a></li>
+			<li class="active"><span>Detalle del trabajador</span></li>
+		</ol>
+	</div>
+</div>
+
+<div class="row" style="margin-top: 10px;">
+	<div class="col-md-12">
+		<div class="main-box">
+			<p class="pull-left" style="padding: 10px 0 0 20px;">
+				<a ui-sref="home.trabajadores">← Volver al listado de trabajadores</a>
+			</p>
+			<p class="pull-right" style="padding: 10px 20px 0 0;">
+				<a ui-sref="home.nuevoTrabajador">Crear un nuevo trabajador</a>
+			</p>
+			<header class="main-box-header clearfix">
+				<h2>Datos del trabajador</h2>
+			</header>
+
+			<div class="main-box-body clearfix">
+				<form role="form" name="formularioTrabajador" ng-submit="guardarTrabajador(formularioTrabajador.$valid)" novalidate>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="form-group" ng-class="{ 'has-error' : validar('rut') }">
+								<label><span class="required-field">*</span> RUT:</label>
+								<input type="text" name="rut" class="form-control" ng-model="trabajador.rut" ng-rut required>
+							</div>
+
+							<div class="form-group" ng-class="{ 'has-error' : validar('nombres') }">
+								<label><span class="required-field">*</span> Nombres:</label>
+								<input type="text" name="nombres" class="form-control" ng-model="trabajador.nombres" required>
+							</div>
+
+							<div class="form-group" ng-class="{ 'has-error' : validar('apellidos') }">
+								<label><span class="required-field">*</span> Apellidos:</label>
+								<input type="text" name="apellidos" class="form-control" ng-model="trabajador.apellidos" required>
+							</div>
+
+							<div class="form-group" ng-class="{ 'has-error' : validar('fecha_nacimiento') }">
+								<label><span class="required-field">*</span> Fecha de nacimiento:</label>
+								<input type="text" name="fecha_nacimiento" class="form-control" ng-model="trabajador.fecha_nacimiento" required b-datepicker>
+							</div>
+
+							<div class="form-group" ng-class="{ 'has-error' : validar('sexo') }">
+								<label><span class="required-field">*</span> Sexo:</label>
+								<select name="sexo" class="form-control" ng-model="trabajador.sexo" required>
+									<option value="Masculino" selected="selected">Masculino</option>
+									<option value="Femenino">Femenino</option>
+								</select>
+							</div>
+
+							<div class="form-group">
+								<label>Nacionalidad:</label>
+								<input type="text" name="nacionalidad" class="form-control" ng-model="trabajador.nacionalidad">
+							</div>
+
+							<div class="form-group">
+								<label>Profesión u oficio:</label>
+								<input type="text" name="profesion_oficio" class="form-control" ng-model="trabajador.profesion_oficio">
+							</div>
+
+							<div class="form-group" ng-class="{ 'has-error' : validar('telefono') }">
+								<label>Teléfono:</label>
+								<input type="number" name="telefono" class="form-control" ng-model="trabajador.telefono">
+							</div>
+
+							<div class="form-group" ng-class="{ 'has-error' : validar('email') }">
+								<label>Email:</label>
+								<input type="email" name="email" class="form-control" ng-model="trabajador.email">
+							</div>
+
+							<div class="form-group">
+								<label>Área o departamento:</label>
+								<input type="text" name="departamento" class="form-control" ng-model="trabajador.departamento">
+							</div>
+
+							<div class="form-group">
+								<label>Cargo a despempeñar:</label>
+								<input type="text" name="cargo" class="form-control" ng-model="trabajador.cargo">
+							</div>
+
+							<div ng-if="role !== 4" class="form-group" ng-class="{ 'has-error' : !empresaValida }">
+								<label><span class="required-field">*</span> Empresa:</label>
+								<!--<angucomplete-alt id="empresas"
+									placeholder="Buscar empresas"
+									pause="400"
+									selected-object="empresaSeleccionada"
+									initial-value="{{trabajador.empresa.razon_social}}"
+									remote-url="http://preview.snh7fujp32384cxrlmffilcvx3q2rzfrd95a1oi3qlgqr529.box.codeanywhere.com/public/empresa/buscar?texto="
+									title-field="razon_social"
+									input-class="form-control"
+									name="empresa"/>-->
+								<!--<ui-select ng-model="$parent.$parent.empresaSeleccionada"
+									theme="bootstrap"
+									ng-disabled="disabled"
+									reset-search-input="false"
+									title="Elegir empresa">
+									<ui-select-match placeholder="Buscar una empresa...">{{$select.selected.razon_social}}</ui-select-match>
+									<ui-select-choices repeat="empresa in empresas track by $index"
+										refresh="cargarEmpresas($select.search)"
+										refresh-delay="0">
+										<div ng-bind-html="empresa.razon_social | highlight: $select.search"></div>
+									</ui-select-choices>
+								</ui-select>-->
+								<ui-select ng-model="$parent.$parent.empresaSeleccionada" autocomplete-empresa></ui-select>
+							</div>
+
+							<div class="form-group">
+								<label>Licencias:</label>
+								<tags-input class="form-group" name="licencias" min-length="1" replace-spaces-with-dashes="false" keyProperty="id" ng-model="trabajador.licencias">
+									<auto-complete min-length="1" source="cargarLicencias($query)" key-property="id" display-property="text"></auto-complete>
+								</tags-input>
+							</div>
+						</div>
+					</div>
+
+					<button type="submit" class="btn btn-primary" ng-disabled="!formularioTrabajador.$valid">Guardar</button>
+					<span style="font-size: 10px;  display: block;  float: right;  margin-top: 15px;">Los campos con <span class="required-field">*</span> son requeridos</span>
+				</form>
+			</div>
+		</div>
+	</div>
+	</div>
+</div>

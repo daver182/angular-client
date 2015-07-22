@@ -1,0 +1,180 @@
+<style>
+	.required-field{
+		color: #ed3e49;
+	}
+
+	.alerts{
+		margin-top: 20px;
+		margin: 10px auto;
+		margin-bottom: 0;
+	}
+
+	.alerts .alert{
+		margin-bottom: 0;
+	}
+</style>
+
+<div class="row">
+	<div class="col-lg-12">
+		<ol class="breadcrumb">
+			<li><a href="" ui-sref="home.main">Inicio</a></li>
+			<li class="active"><span>Detalle del usuario</span></li>
+		</ol>
+	</div>
+</div>
+
+<div class="row" style="margin-top: 10px;">
+	<div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
+		<div class="main-box">
+			<p class="pull-left" style="padding: 10px 0 0 20px;">
+				<a ui-sref="home.usuarios">← Volver al listado de usuarios</a>
+			</p>
+			<p class="pull-right" style="padding: 10px 20px 0 0;">
+				<a ui-sref="home.nuevoUsuario">Crear un nuevo usuario</a>
+			</p>
+			<header class="main-box-header clearfix">
+				<h2>Datos del usuario</h2>
+			</header>
+
+			<div class="main-box-body clearfix">
+				<form role="form" name="formularioUsuario" ng-submit="guardarUsuario(formularioUsuario.$valid)" novalidate>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="form-group" ng-class="{ 'has-error' : validar('nombre') }">
+								<label><span class="required-field">*</span> Nombre:</label>
+								<input type="text" name="nombre" class="form-control" ng-model="usuario.nombre" required>
+							</div>
+
+							<div class="form-group" ng-class="{ 'has-error' : validar('email') }">
+								<label><span class="required-field">*</span> Email:</label>
+								<input type="email" name="email" class="form-control" ng-model="usuario.email" required>
+							</div>
+
+							<div class="form-group" ng-class="{ 'has-error' : validar('cargo') }">
+								<label><span class="required-field">*</span> Cargo:</label>
+								<input type="text" name="cargo" class="form-control" ng-model="usuario.cargo" required>
+							</div>
+
+							<div class="form-group" ng-class="{ 'has-error' : validar('password') }">
+								<label><span class="required-field">*</span> Password:</label>
+								<input type="text" name="password" class="form-control" ng-model="usuario.password" required>
+							</div>
+
+							<div class="form-group" ng-class="{ 'has-error' : validar('tipo_usuario') }">
+								<label><span class="required-field">*</span> Tipo de usuario:</label>
+								<select name="tipo_usuario" class="form-control" ng-model="usuario.tipo_usuario_id" ng-options="tipo.id as tipo.nombre for tipo in tiposUsuario" required></select>
+							</div>
+
+							<div class="form-group">
+								<label>Empresa:</label>
+								<!--<angucomplete-alt id="mandantes"
+									placeholder="Buscar empresas"
+									pause="400"
+									selected-object="empresaSeleccionada"
+									initial-value="{{usuario.empresa}}"
+									remote-url="http://preview.snh7fujp32384cxrlmffilcvx3q2rzfrd95a1oi3qlgqr529.box.codeanywhere.com/public/empresa/buscar?texto="
+									title-field="razon_social"
+									input-class="form-control"
+									name="empresa"/>-->
+									<ui-select ng-model="$parent.$parent.empresaSeleccionada"
+										theme="bootstrap"
+										ng-disabled="disabled"
+										reset-search-input="false"
+										title="Elegir empresa">
+										<ui-select-match placeholder="Buscar una empresa...">{{$select.selected.razon_social}}</ui-select-match>
+										<ui-select-choices repeat="empresa in empresas track by $index"
+											refresh="cargarEmpresas($select.search)"
+											refresh-delay="0">
+											<div ng-bind-html="empresa.razon_social | highlight: $select.search"></div>
+										</ui-select-choices>
+									</ui-select>
+							</div>
+						</div>
+					</div>
+
+					<button type="submit" class="btn btn-primary" ng-disabled="!formularioUsuario.$valid">Guardar</button>
+					<span style="font-size: 10px;  display: block;  float: right;  margin-top: 15px;">Los campos con <span class="required-field">*</span> son requeridos</span>
+				</form>
+			</div>
+		</div>
+	</div>
+	</div>
+</div>
+
+<!-- <div class="container">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
+			<p class="pull-left">
+				<a ui-sref="home.empresas">← Volver al listado de empresas</a>
+			</p>
+			<p class="pull-right">
+				<a ui-sref="home.nuevaEmpresa">Crear una nueva empresa</a>
+			</p>
+			<div class="sign-form" style="clear: both;">
+				<div class="sign-inner">
+					<h3 class="first-child">Datos de la empresa</h3>
+					<hr>
+					<form name="formularioEmpresa" ng-submit="guardarEmpresa(formularioEmpresa.$valid)" novalidate>
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="form-group" ng-class="{ 'has-error' : validar('rut') }">
+									<label><span class="required-field">*</span> RUT:</label>
+									<input type="text" name="rut" class="form-control" ng-model="empresa.rut" ng-rut required>
+									<!-- <p ng-show="validar('rut')" class="help-block">El RUT es requerido.</p>
+								</div>
+
+								<div class="form-group" ng-class="{ 'has-error' : validar('razon_social') }">
+									<label><span class="required-field">*</span> Razon Social:</label>
+									<input type="text" name="razon_social" class="form-control" ng-model="empresa.razon_social" required>
+									<!-- <p ng-show="validar('razon_social')" class="help-block">La razon social es requerida.</p>
+								</div>
+
+								<div class="form-group" ng-class="{ 'has-error' : validar('giro') }">
+									<label><span class="required-field">*</span> Giro:</label>
+									<input type="text" name="giro" class="form-control" ng-model="empresa.giro" required>
+									<!-- <p ng-show="validar('giro')" class="help-block">El giro es requerido.</p>
+								</div>
+
+
+								<div class="form-group">
+									<label>Teléfono:</label>
+									<input type="text" name="telefono" class="form-control" ng-model="empresa.telefono">
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="form-group" ng-class="{ 'has-error' : validar('domicilio_legal') }">
+									<label><span class="required-field">*</span> Domicilio Legal:</label>
+									<input type="text" name="domicilio_legal" class="form-control" ng-model="empresa.domicilio_legal" required>
+									<!-- <p ng-show="validar('domicilio_legal')" class="help-block">El domicilio legal es requerido.</p>
+								</div>
+
+								<div class="form-group" ng-class="{ 'has-error' : validar('domicilio_operacional') }">
+									<label><span class="required-field">*</span> Domicilio Operacional:</label>
+									<input type="text" name="domicilio_operacional" class="form-control" ng-model="empresa.domicilio_operacional" required>
+									<!-- <p ng-show="validar('domicilio_operacional')" class="help-block">La domicilio operacional es requerido.</p>
+								</div>
+
+								<div class="form-group" ng-class="{ 'has-error' : validar('direccion_facturacion') }">
+									<label><span class="required-field">*</span> Dirección de facturación:</label>
+									<input type="text" name="direccion_facturacion" class="form-control" ng-model="empresa.direccion_facturacion" required>
+									<!-- <p ng-show="validar('direccion_facturacion')" class="help-block">La dirección de facturación es requerida.</p>
+								</div>
+
+
+								<div class="form-group">
+									<label>Email:</label>
+									<input type="email" name="email" class="form-control" ng-model="empresa.email">
+								</div>
+							</div>
+						</div>
+
+						<button type="submit" class="btn btn-theme-primary" ng-disabled="!formularioEmpresa.$valid">Guardar</button>
+						<span style="font-size: 10px;  display: block;  float: right;  margin-top: 15px;">Los campos con <span class="required-field">*</span> son requeridos</span>
+					</form>
+
+					<div class="alerts"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div> -->

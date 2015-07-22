@@ -1,0 +1,92 @@
+<div class="row">
+	<div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1">
+		<div class="main-box">
+			<header class="main-box-header clearfix">
+				
+			</header>
+			
+			<div class="main-box-body clearfix">
+				<div class="row">
+					<div class="col-sm-2">
+						<img ng-if="evaluacion.trabajador.imagen" ng-src="{{rutaBase + evaluacion.trabajador.imagen}}" alt="" class="profile-img img-responsive" />
+						<img ng-cloak ng-if="!evaluacion.trabajador.imagen" src="http://www.hvacsite.com/assets/misc/no-avatar-62-d18c4750a2d78a5b251023a3dd99e28b.png" alt="" class="profile-img img-responsive" />
+					</div>
+					<div class="col-sm-5">
+						
+						<h2>{{evaluacion.trabajador.nombres}} {{evaluacion.trabajador.apellidos}}</h2>
+						<p>{{evaluacion.trabajador.rut | rut}}</p>
+						<div class="row">
+							<div class="col-sm-4"><strong>Empresa:</strong></div>
+							<div class="col-sm-8" style="text-align: left;">{{evaluacion.trabajador.empresa.razon_social}}</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-4"><strong>Edad:</strong></div>
+							<div class="col-sm-8" style="text-align: left;">{{evaluacion.trabajador.edad}}</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-4"><strong>Nacionalidad:</strong></div>
+							<div class="col-sm-8" style="text-align: left;">{{evaluacion.trabajador.nacionalidad}}</div>
+						</div>
+						<div class="row" ng-if="evaluacion.trabajador.correo">
+							<div class="col-sm-4"><strong>Correo:</strong></div>
+							<div class="col-sm-8" style="text-align: left;">{{evaluacion.trabajador.correo}}</div>
+						</div>
+					</div>
+					<div class="col-sm-5" style="text-align: right;">
+						<p>Habilitado hasta</p>
+						<p style="font-size: 30px;">{{evaluacion.fechaVigencia | amDateFormat:'LL'}}</p>
+						<p>Fecha de evaluación: <strong>{{evaluacion.fechaEvaluacion | amDateFormat:'LL'}}</strong> </p>
+
+						<p class="text-info">Faenas a desempeñarse:</p>
+						<span ng-repeat="faena in evaluacion.faenas" style="margin-left: 5px;" class="label label-primary label-large">{{faena.text}}</span>
+					</div>
+				</div>
+
+				<div class="row" style="margin-top: 30px;">
+					<div class="col-sm-12">
+						<div class="main-box-body clearfix">
+							<h2 style="text-align: center;">Documentos requeridos</h2>
+							<table class="table">
+								<thead>
+									<tr>
+										<th>Documento ingresado</th>
+										<th>Fecha de vigencia</th>
+										<th>Estado</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="documento in requisitosEvaluacion">
+										<td>{{documento.requisito}}</td>
+										<td>{{documento.vigencia}}</td>
+										<td ng-if="documento.estado == 'Aprobado'" class="text-success"><i class="fa fa-check fa-lg"></i> Aprobado</td>
+										<td ng-if="documento.estado == 'Rechazado'" class="text-danger"><i class="fa fa-times fa-lg"></i> Rechazado</td>
+									</tr>
+								</tbody>
+							</table>
+
+
+							<h2 style="text-align: center;">Habilitaciones y restricciones</h2>
+							<table class="table">
+								<thead>
+									<tr>
+										<th>Labor o función a despempeñar</th>
+										<th>Estado</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="habilitacion in habilitaciones">
+										<td>{{habilitacion.nombre}}</td>
+										<td ng-if="habilitacion.habilitado == '1'" class="text-success"><i class="fa fa-check fa-lg"></i> Aprobado</td>
+										<td ng-if="habilitacion.habilitado == '0'" class="text-danger"><i class="fa fa-times fa-lg"></i> Rechazado</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+
+				<a href="" class="btn btn-primary pull-right"><i class="fa fa-file-pdf-o"></i> Generar PDF</a>
+			</div>
+		</div>	
+	</div>
+</div>

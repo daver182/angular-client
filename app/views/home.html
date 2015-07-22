@@ -1,30 +1,125 @@
-<!--<div class="container">
-	<div class="header">
-		<ul class="nav nav-pills pull-right">
-			<li class="active"><a ng-href="#">Home</a></li>
-			<li><a ui-sref="home.trabajadores">Trabajadores</a></li>
-			<li><a ui-sref="home.empresas">Empresas</a></li>
-		</ul>
-		<h3 class="text-muted">Gestión de Contratistas</h3>
-	</div>
-
-	<div ui-view></div>
-</div>-->
-
-<!-- Navigation -->
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+<header class="navbar" id="header-navbar">
 	<div class="container">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<a ui-sref="home.main" id="logo" class="navbar-brand">
+			<img src="styles/images/logo_white.png" alt="" class="normal-logo logo-white"/>
+			<img src="styles/images/logo_white.png" alt="" class="normal-logo logo-black"/>
+			<img src="styles/images/logo_white.png" alt="" class="small-logo hidden-xs hidden-sm hidden"/>
+		</a>
+
+		<div class="clearfix">
+			<button class="navbar-toggle" type="button" ng-click="isCollapsed = !isCollapsed">
 				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
+				<span class="fa fa-bars"></span>
 			</button>
-			<a class="navbar-brand" href="index.html"><img src="img/logo.png" alt="..."></a>
+
+			<div class="nav-no-collapse navbar-left pull-left hidden-sm hidden-xs">
+				<ul class="nav navbar-nav pull-left">
+					<li>
+						<a class="btn" id="make-small-nav" ng-click="smallMenu = !smallMenu">
+							<i class="fa fa-bars"></i>
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="nav-no-collapse pull-right" id="header-nav">
+				<ul class="nav navbar-nav pull-right">
+					<li dropdown class="profile-dropdown">
+						<a href="#" dropdown-toggle>
+							<img ng-src="{{rutaBase + 'adjuntos/empresas/' + user.logo}}" alt=""/>
+							<span class="hidden-xs">{{user.nombre}}</span> <b class="caret"></b>
+						</a>
+						<ul class="dropdown-menu  dropdown-menu-right">
+							<li><a href=""><i class="fa fa-user"></i>Perfil</a></li>
+							<li><a href="" ui-sref="logout"><i class="fa fa-power-off"></i>Logout</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
 		</div>
 	</div>
-</div> <!-- / .navigation -->
+</header>
 
-<!-- Wrapper -->
-<div class="wrapper" ui-view></div>
+<div id="page-wrapper" class="container" ng-class="{'nav-small': smallMenu}">
+	<div class="row">
+		<div id="nav-col" style="height: 100%;">
+			<section id="col-left" class="col-left-nano">
+				<div id="col-left-inner" class="col-left-nano-content">
+					<div class="collapse navbar-collapse navbar-ex1-collapse" id="sidebar-nav" collapse="isCollapsed">
+						<ul class="nav nav-pills nav-stacked">
+							<li ng-if="role !== 4" ng-class="{ active: $state.is('home.empresas') || $state.is('home.nuevaEmpresa') || $state.is('home.detalleEmpresa') }">
+								<a href="" ui-sref="home.empresas">
+									<i class="fa fa-building"></i>
+									<span>Empresas</span>
+								</a>
+							</li>
+
+							<li ng-class="{ active: $state.is('home.trabajadores') || $state.is('home.nuevoTrabajador') || $state.is('home.detalleTrabajador') }">
+								<a href="" ui-sref="home.trabajadores">
+									<i class="fa fa-male"></i>
+									<span>Trabajadores</span>
+								</a>
+							</li>
+
+							<li ng-class="{ active: $state.is('home.contratos') || $state.is('home.nuevoContrato') || $state.is('home.detalleContrato') }">
+								<a href="" ui-sref="home.contratos">
+									<i class="fa fa-suitcase"></i>
+									<span>Contratos</span>
+								</a>
+							</li>
+
+							<!--<li ng-if="role !== 4" ng-class="{ active: $state.is('home.usuarios') || $state.is('home.nuevoUsuario') || $state.is('home.detalleUsuario') }">
+								<a href="" ui-sref="home.usuarios">
+									<i class="fa fa-users"></i>
+									<span>Usuarios</span>
+								</a>
+							</li>-->
+
+							<li ng-class="{ active: $state.is('home.evaluaciones') || $state.is('home.nuevaEvaluacion') || $state.is('home.detalleEvaluacion') }">
+								<a href="" ui-sref="home.evaluaciones">
+									<i class="fa fa-file-text"></i>
+									<span>Evaluaciones</span>
+								</a>
+							</li>
+
+							<li ng-class="{ active: $state.is('home.nominas') }">
+								<a href="" ui-sref="home.nominas">
+									<i class="fa fa-file-text"></i>
+									<span>Nominas</span>
+								</a>
+							</li>
+
+							<li dropdown ng-if="role !== 4" ng-class="{ 'active open': submenu === 'usuarios' || submenu === 'estado_evaluacion'}">
+								<a href="#" dropdown-toggle class="dropdown-toggle">
+									<i class="fa fa-table"></i>
+									<span>Administración</span>
+									<i class="fa fa-angle-right drop-icon"></i>
+								</a>
+								<ul class="submenu">
+									<li>
+										<a href="" ui-sref="home.usuarios" ng-class="{ 'active': submenu === 'usuarios' }">
+											Usuarios
+										</a>
+									</li>
+									<li>
+										<a href="" ui-sref="home.recursos">
+											Recursos
+										</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+			<div id="nav-col-submenu"></div>
+		</div>
+		<div id="content-wrapper">
+			<div class="row">
+				<div class="col-lg-12">
+					<div ui-view></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

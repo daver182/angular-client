@@ -1,0 +1,36 @@
+Objectivos para el primer entregable:
+  ✔ Mejorar estilos de la pagina de login @done (15-05-03 16:50)
+  ✔ Crear vista con las evaluaciones con filtros @done (15-05-03 17:16)
+  ✔ Permitir subir imagen del trabajador, en la segunda etapa de una evaluacion @done (15-05-03 19:02)
+  ✔ Generar informe preliminar (html o pdf) @done (15-05-07 11:10)
+
+Modulo Requsitos:
+  ✔ Mejorar los botones en la vista de requisitos (radio input) @done (15-05-25 11:38)
+  ✔ No permitir dobles requisitos @done (15-05-26 12:09)
+  ✔ Corregir el error al agregar un requisito y seleccionar un archivo @done (15-05-26 17:23)
+  ✔ Terminar la creacion y eliminacion de requisitos @done (15-05-26 12:09)
+
+Modulo Empresas:
+  ✔ Permitir agregar el logo de la empresa @done (15-06-08 17:40)
+
+Modulo Evaluación:
+  ✔ Mostrar mas datos de una evaluación (en el listado)  @done (15-06-02 09:32)
+
+Modulo Resumen:
+  ✔ Añadir filtro en la pagina de resumen @done (15-06-02 09:31)
+  ☐ Generar credencial del trabajador (html o pdf)
+  ☐ Estudiar rediseño de resumen de evaluaciones
+
+Modulo Nominas:
+  ✔ Generar nominas filtradas para exportación
+
+General:
+  ✔ Mostrar datos del usuario loggeado (con imagen de empresa)
+  ☐ Por ahora redirigir desde la pantalla de inicio a otras rutas
+  ✔ Mejorar template base del menu
+  ☐ Añadir terminología de ayuda
+  ☐ Generar los otros modulos de administracion
+
+  ✔ Asociar a un usuario con una empresa o nulo @done (15-05-20 13:24)
+  ✔ Cambiar la forma de guardar los requisitos, para terminar esa parte @done (15-05-19 15:51)
+  ✔ Definir que un usuario es una **persona** asociada a una **empresa** @done (15-05-20 13:25)

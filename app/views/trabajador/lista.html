@@ -1,5 +1,57 @@
-<ul>
-	<li ng-repeat="trabajador in trabajadores">
-		<a ui-sref="home.detalleTrabajador({ id: trabajador.id })">{{trabajador.nombres}}</a>
-	</li>
-</ul>
+<div class="row">
+	<div class="col-lg-12">
+		<ol class="breadcrumb">
+			<li><a href="" ui-sref="home.main">Inicio</a></li>
+			<li class="active"><span>Listado de trabajadores</span></li>
+		</ol>
+		
+		<h1>Trabajadores</h1>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-12">
+		<div class="main-box clearfix">
+			<header class="main-box-header clearfix">
+				<h2 class="pull-left">Listado de trabajadores registrados</h2>
+				
+				<div class="filter-block pull-right">
+					
+					<!-- <a ng-show="tipoUsuario === 1" ui-sref="home.nuevoTrabajador" href="" class="btn btn-primary pull-right">
+						<i class="fa fa-plus-circle fa-lg"></i> Agregar trabajador
+					</a> -->
+					<a ui-sref="home.nuevoTrabajador" href="" class="btn btn-primary pull-right">
+						<i class="fa fa-plus-circle fa-lg"></i> Agregar trabajador
+					</a>
+				</div>
+			</header>
+			
+			<div class="main-box-body clearfix">
+				<div class="table-responsive">
+					<table ng-table="tableParams" show-filter="false" class="table">					
+						<tbody>
+							<tr ng-repeat="trabajador in $data" ng-class-odd="odd" ng-class-even="even">
+								<td data-title="'RUT'">
+									{{ trabajador.rut  | rut }}
+								</td>
+								<td data-title="'Nombres'" filter="{ 'nombres': 'text' }" sortable="'nombres'">
+									{{ trabajador.nombres }}
+								</td>
+								<td data-title="'Apellidos'" filter="{ 'apellidos': 'text' }" sortable="'apellidos'">
+									{{ trabajador.apellidos }}
+								</td>
+								<td data-title="'Empresa'">
+									{{ trabajador.razon_social }}
+								</td>
+								<td data-title="''">
+									<a class="btn btn-primary btn-sm" ui-sref="home.detalleTrabajador({ id: trabajador.id })"><i class="fa fa-pencil"></i></a>
+									<a class="btn btn-danger btn-sm" href="" ng-click="borrar(trabajador.id)"><i class="fa fa-trash-o"></i></a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

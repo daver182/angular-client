@@ -1,0 +1,107 @@
+<div class="row">
+	<div class="col-lg-12">
+		<ol class="breadcrumb">
+			<li><a href="" ui-sref="home.main">Inicio</a></li>
+			<li class="active"><span>Nominas</span></li>
+		</ol>
+
+		<h1>Generar nominas de trabajadores</h1>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-12">
+		<div class="main-box clearfix">
+			<header class="main-box-header clearfix">
+				<h2 class="pull-left">Filtrar resultados</h2>
+			</header>
+
+			<div class="main-box-body clearfix">
+				<div class="row">
+
+				</div>
+				<form class="form">
+					<div class="form-group">
+						<label for="exampleInputName2">Nombre</label>
+						<input type="text" class="form-control" ng-model="filtro.nombre" placeholder="Nombre del trabajador">
+					</div>
+					<div class="form-group">
+						<label for="exampleInputEmail2">Fecha de evaluación:</label>
+						<div class="row">
+							<div class="col-xs-6"><input type="text" name="fecha_evaluación" class="form-control" ng-model="filtro.fecha_evaluacion_desde" required b-datepicker placeholder="Entre 00/00/0000"></div>
+							<div class="col-xs-6"><input type="text" name="fecha_evaluación" class="form-control" ng-model="filtro.fecha_evaluacion_hasta" required b-datepicker placeholder="Hasta 00/00/0000"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label>Empresa mandante:</label>
+						<angucomplete-alt id="empresas"
+							placeholder="Empresa mandante"
+							pause="400"
+							selected-object="mandante"
+							remote-url="http://preview.snh7fujp32384cxrlmffilcvx3q2rzfrd95a1oi3qlgqr529.box.codeanywhere.com/public/empresa/buscar?texto="
+							title-field="razon_social"
+							input-class="form-control"
+							name="empresa"/>
+					</div>
+
+					<div class="form-group">
+						<label>Empresa contratista:</label>
+						<angucomplete-alt id="empresas"
+							placeholder="Empresa contratista"
+							pause="400"
+							selected-object="contratista"
+							remote-url="http://preview.snh7fujp32384cxrlmffilcvx3q2rzfrd95a1oi3qlgqr529.box.codeanywhere.com/public/empresa/buscar?texto="
+							title-field="razon_social"
+							input-class="form-control"
+							name="empresa"/>
+					</div>
+					<button type="button" class="btn btn-primary" ng-click="filtrar()">Filtrar</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-12">
+		<div class="main-box clearfix">
+			<header class="main-box-header clearfix">
+				<h2 class="pull-left">Nomina</h2>
+			</header>
+
+			<div class="main-box-body clearfix" ng-show="resultados">
+                <a class="btn btn-primary" ng-mousedown="csv.generate()" ng-href="{{ csv.link() }}" download="test.csv">Exportar</a>
+				<div class="table-responsive">
+					<table ng-table="tableParams" show-filter="false" class="table" export-csv="csv">
+						<tbody>
+							<tr ng-repeat="nomina in $data" ng-class-odd="odd" ng-class-even="even">
+                                <td data-title="'Rut'">
+									{{ nomina.rut | rut}}
+								</td>
+								<td data-title="'Trabajador'">
+									{{ nomina.nombres }} {{ nomina.apellidos }}
+								</td>
+                                <td data-title="'Cargo'">
+									{{ nomina.cargo }}
+								</td>
+								<td data-title="'Fecha de evaluación'">
+									{{ nomina.fecha_evaluacion }}
+								</td>
+								<td data-title="'Fecha de vigencia'">
+									{{ nomina.fecha_vigencia }}
+								</td>
+								<td data-title="'Empresa'">
+									{{ nomina.razon_social }}
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+            <div class="main-box-body clearfix" ng-hide="resultados">
+                No hay resultados
+            </div>
+		</div>
+	</div>
+</div>

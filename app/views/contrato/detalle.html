@@ -1,0 +1,111 @@
+<style>
+	.required-field{
+		color: #ed3e49;
+	}
+
+	.alerts{
+		margin-top: 20px;
+		margin: 10px auto;
+		margin-bottom: 0;
+	}
+
+	.alerts .alert{
+		margin-bottom: 0;
+	}
+</style>
+
+<div class="row">
+	<div class="col-lg-12">
+		<ol class="breadcrumb">
+			<li><a href="" ui-sref="home.main">Inicio</a></li>
+			<li class="active"><span>Detalle de contrato</span></li>
+		</ol>
+	</div>
+</div>
+
+<div class="row" style="margin-top: 10px;">
+	<div class="col-md-12">
+		<div class="main-box">
+			<p class="pull-left" style="padding: 10px 0 0 20px;">
+				<a ui-sref="home.contratos">← Volver al listado de contratos</a>
+			</p>
+			<p class="pull-right" style="padding: 10px 20px 0 0;">
+				<a ui-sref="home.nuevoContrato">Crear un nuevo contrato</a>
+			</p>
+			<header class="main-box-header clearfix">
+				<h2>Datos del contrato</h2>
+			</header>
+			
+			<div class="main-box-body clearfix">
+				<form role="form" name="formularioContrato" ng-submit="guardarContrato(formularioContrato.$valid)" novalidate>
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="form-group" ng-class="{ 'has-error' : validar('denominacion') }">
+								<label><span class="required-field">*</span> Denominación:</label>
+								<input type="text" name="denominacion" class="form-control" ng-model="contrato.denominacion" required>
+							</div>
+
+							<div class="form-group" ng-class="{ 'has-error' : validar('serie_identificacion') }">
+								<label><span class="required-field">*</span> Serie Identificación:</label>
+								<input type="text" name="serie_identificacion" class="form-control" ng-model="contrato.serie_identificacion" required>
+							</div>
+
+							<div class="form-group" ng-class="{ 'has-error' : validar('nombre_administrador') }">
+								<label><span class="required-field">*</span> Nombre del administrador:</label>
+								<input type="text" name="nombre_administrador" class="form-control" ng-model="contrato.nombre_administrador" required>
+							</div>
+
+							<div class="form-group">
+								<label> Email del administrador:</label>
+								<input type="email" name="email_administrador" class="form-control" ng-model="contrato.email_administrador">
+							</div>
+
+							<div class="form-group">
+								<label> Teléfono del administrador:</label>
+								<input type="text" name="telefono_administrador" class="form-control" ng-model="contrato.telefono_administrador">
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="form-group" ng-class="{ 'has-error' : validar('fecha_inicio') }">
+								<label><span class="required-field">*</span> Fecha de inicio:</label>
+								<input type="text" name="fecha_inicio" class="form-control" ng-model="contrato.fecha_inicio" required b-datepicker>
+							</div>
+
+							<div class="form-group" ng-class="{ 'has-error' : validar('fecha_termino') }">
+								<label><span class="required-field">*</span> Fecha de término:</label>
+								<input type="text" name="fecha_termino" class="form-control" ng-model="contrato.fecha_termino" required b-datepicker>
+							</div>
+
+							<div class="form-group" ng-class="{ 'has-error' : !empresaValida }">
+								<label><span class="required-field">*</span> Mandante:</label>
+								<angucomplete-alt id="mandantes"
+									placeholder="Buscar empresas"
+									pause="400"
+									selected-object="empresaSeleccionada"
+									initial-value="{{contrato.mandante.razon_social}}"
+									remote-url="http://preview.snh7fujp32384cxrlmffilcvx3q2rzfrd95a1oi3qlgqr529.box.codeanywhere.com/public/empresa/buscar?texto="
+									title-field="razon_social"
+									input-class="form-control"
+									name="mandante"/>
+							</div>
+							
+							<div class="form-group">
+								<label><span class="required-field">*</span> Faenas a desempeñarse:</label>
+								<tags-input class="form-group" name="faenas" replace-spaces-with-dashes="false" keyProperty="id" ng-model="contrato.faenas">
+									<auto-complete source="cargarFaenas($query)" key-property="id" display-property="text"></auto-complete>
+								</tags-input>
+							</div>
+							
+						</div>
+					</div>
+
+					<span style="font-size: 10px;  display: block;  float: left;  margin-top: 15px;">Los campos con <span class="required-field">*</span> son requeridos</span>
+					<button style="float: right" type="submit" class="btn btn-primary" ng-disabled="!formularioContrato.$valid">Guardar y continuar</button>
+					
+
+				</form>
+			</div>
+		</div>
+	</div>
+	</div>
+</div>

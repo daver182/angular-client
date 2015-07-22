@@ -1,0 +1,82 @@
+<div class="row">
+	<div class="col-lg-12">
+		<ol class="breadcrumb">
+			<li><a href="" ui-sref="home.main">Inicio</a></li>
+			<li class="active"><span>Recursos del sistema</span></li>
+		</ol>
+
+		<h1>Lista de recursos del sistema</h1>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-12">
+		<div class="main-box clearfix">
+			<header class="main-box-header clearfix">
+				<h2 class="pull-left">Listado con todos los recursos presentes en el sistema</h2>
+
+				<div class="filter-block pull-right">
+
+
+				</div>
+			</header>
+
+			<div class="main-box-body clearfix">
+                <select class="form-control" ng-model="recursoActual">
+                    <option value="1">Estados evaluación</option>
+                    <option value="2">Estados requisito</option>
+                    <option value="3">Faenas</option>
+                    <option value="4">Habilidades</option>
+                    <option value="5">Licencias</option>
+                    <option value="6">Requisitos</option>
+                    <option value="7">Tipos de usuario</option>
+                </select>
+
+                <button type="button" name="button" class="btn btn-primary" ng-click="cargar()">Cargar</button>
+
+                <!--<div ng-repeat="item in items track by $index">
+                    <pre ng-hide="editMode[$index]">{{ item.nombre }}</pre>
+                    <input ng-show="editMode[$index]" type="text" name="name" ng-model="item.nombre">
+                    <button ng-show="editMode[$index]" ng-click="guardar($index)">Guardar</button>
+                    <button ng-hide="editMode[$index]" ng-click="editar($index)">Editar</button>
+                    <button ng-hide="editMode[$index]" ng-click="borrar($index)">Borrar</button>
+                </div>-->
+
+                <button type="button" class="btn btn-secondary" ng-click="agregar()">Agregar</button>
+
+                <ul class="widget-todo" style="margin-top: 10px;">
+					<li class="clearfix" ng-repeat="item in items track by $index">
+						<div class="name">
+							<span ng-hide="editMode[$index]" style="font-size: 12px; margin-left: 5px;">
+								{{ item.nombre }}
+							</span>
+                            <input class="form-control" ng-show="editMode[$index]" type="text" name="name" ng-model="item.nombre">
+						</div>
+						<div class="actions">
+
+							<a ng-hide="editMode[$index]" href="" class="table-link" ng-click="editar($index)">
+								<i class="fa fa-pencil"></i>
+							</a>
+							<a ng-hide="editMode[$index]" href="" class="table-link danger" ng-click="borrar($index)">
+								<i class="fa fa-trash-o"></i>
+							</a>
+                            <a ng-show="editMode[$index]" href="" class="table-link" ng-click="guardar($index)">
+								<i style="vertical-align: middle;" class="fa fa-save"></i>
+							</a>
+						</div>
+					</li>
+				</ul>
+                <!--<list-view list="item in items" select-mode="single">
+                    <div>
+                        <button list-edit-toggle>You can toggle "$editMode"</button>
+                        <button list-add="addItem()">You can add things too!</button>
+                    </div>
+                    <list-item>
+                        <pre>{{ item.nombre }}</pre>
+                        <button list-item-edit="remove" ng-show="$editMode">Borrar!</button>
+                    </list-item>
+                </list-view>-->
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,71 @@
+<div class="row"> <div class="col-lg-12"> <ol class="breadcrumb"> <li><a href="" ui-sref="home.main">Inicio</a></li> <li class="active"><span>Listado de empresas</span></li> </ol> <h1>Empresas</h1> </div> </div> <div class="row"> <div class="col-lg-12"> <div class="main-box clearfix"> <header class="main-box-header clearfix"> <h2 class="pull-left">Listado de empresas registradas</h2> <div class="filter-block pull-right"> <a ui-sref="home.nuevaEmpresa" href="" class="btn btn-primary pull-right"> <i class="fa fa-plus-circle fa-lg"></i> Agregar empresa </a> </div> </header> <div class="main-box-body clearfix"> <div class="table-responsive"> <table ng-table="tableParams" show-filter="false" class="table"> <tbody> <tr ng-repeat="empresa in $data" ng-class-odd="odd" ng-class-even="even"> <td data-title="'Razon Social'" filter="{ 'razon_social': 'text' }" sortable> {{empresa.razon_social}}  <td data-title="'RUT'"> {{empresa.rut | rut }}  <td data-title="'Giro'"> {{empresa.giro}}  <td data-title="'Domicilio Legal'"> {{empresa.domicilio_legal}}  <td data-title="'Teléfono'"> {{empresa.telefono}} <span ng-show="!empresa.telefono"><i class="fa fa-times"></i></span>  <td data-title="''"> <a class="btn btn-primary btn-sm" ui-sref="home.detalleEmpresa({ id: empresa.id })"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger btn-sm" href="" ng-click="borrar(empresa.id)"><i class="fa fa-trash-o"></i></a>    </table> </div> <!--<ul class="pagination pull-right">
+					<li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
+					<li><a href="#">1</a></li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+					<li><a href="#">4</a></li>
+					<li><a href="#">5</a></li>
+					<li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
+				</ul>--> </div> </div> </div> </div> <!--<div class="topic">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4">
+				<h3>Lista de empresas</h3>
+			</div>
+			<div class="col-sm-8">
+				<ol class="breadcrumb pull-right hidden-xs">
+					<li><a ui-sref="home.main">Inicio</a></li>
+					<li class="active">Lista de empresas</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-sm-12">
+			<a class="btn btn-theme-primary pull-right" style="margin-bottom: 10px;" href="#/empresas/nueva">Crear nueva empresa</a>
+		</div>
+	</div>
+	
+
+	
+	<div class="row">
+		<div class="col-sm-12">
+			<div loading-container="tableParams.settings().$loading">
+				<div class="table-info">
+					<table ng-table="tableParams" show-filter="false" cellpadding="0" cellspacing="0" border="0" class="table table-bordered b-pricing-table__table" style="margin-bottom: 10px;">
+						<tbody>
+							<tr ng-repeat="empresa in $data" ng-class-odd="odd" ng-class-even="even">
+								<td data-title="'RUT'">
+									{{empresa.rut | rut }}
+								</td>
+								<td data-title="'Razon Social'" filter="{ 'razon_social': 'text' }" sortable="'razon_social'">
+									{{empresa.razon_social}}
+								</td>
+								<td data-title="'Giro'">
+									{{empresa.giro}}
+								</td>
+								<td data-title="'Domicilio Legal'">
+									{{empresa.domicilio_legal}}
+								</td>
+								<td data-title="'Teléfono'">
+									{{empresa.telefono}} <span ng-show="!empresa.telefono"><i class="fa fa-times"></i></span>
+								</td>
+								<td data-title="''">
+									<a class="btn btn-primary btn-sm" ui-sref="home.detalleEmpresa({ id: empresa.id })"><i class="fa fa-pencil"></i></a>
+									<a class="btn btn-danger btn-sm" href="" ng-click="borrar(empresa.id)"><i class="fa fa-trash-o"></i></a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		
+	</div>     
+</div>-->

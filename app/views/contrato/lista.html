@@ -1,0 +1,56 @@
+<div class="row">
+	<div class="col-lg-12">
+		<ol class="breadcrumb">
+			<li><a href="" ui-sref="home.main">Inicio</a></li>
+			<li class="active"><span>Listado de contratos</span></li>
+		</ol>
+
+		<h1>Contratos</h1>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-12">
+		<div class="main-box clearfix">
+			<header class="main-box-header clearfix">
+				<h2 class="pull-left">Listado de contratos</h2>
+
+				<div class="filter-block pull-right">
+
+					<a ui-sref="home.nuevoContrato" href="" class="btn btn-primary pull-right">
+						<i class="fa fa-plus-circle fa-lg"></i> Agregar contrato
+					</a>
+				</div>
+			</header>
+
+			<div class="main-box-body clearfix">
+				<div class="table-responsive">
+					<table ng-table="tableParams" show-filter="false" class="table">
+
+						<tbody>
+							<tr ng-repeat="contrato in $data" ng-class-odd="odd" ng-class-even="even">
+								<td data-title="'Denominación'" filter="{ 'denominacion': 'text' }" sortable="'denominacion'">
+									{{ contrato.denominacion }}
+								</td>
+								<td data-title="'Administrador'">
+									{{ contrato.nombre_administrador }}
+								</td>
+								<td data-title="'Inicio'">
+									{{ contrato.fecha_inicio }}
+								</td>
+								<td data-title="'Termino'">
+									{{ contrato.fecha_termino }}
+								</td>
+								<td data-title="''">
+									<a class="btn btn-primary btn-sm" title="Editar contrato" ui-sref="home.detalleContrato({ id: contrato.id })"><i class="fa fa-pencil"></i></a>
+									<a class="btn btn-success btn-sm" title="Editar contratistas" ui-sref="home.contratistasContrato({ id: contrato.id })"><i class="fa fa-suitcase"></i></a>
+									<a class="btn btn-danger btn-sm" title="Eliminar contrato"  href="" ng-click="borrar(contrato.id)"><i class="fa fa-trash-o"></i></a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

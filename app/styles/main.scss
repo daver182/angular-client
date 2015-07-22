@@ -1,6 +1,5 @@
 // $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
 // // bower:scss
- @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
  // endbower
 
 // .browsehappy {
@@ -90,3 +89,115 @@
 //     border-bottom: 0;
 //   }
 // }
+
+@media (max-width: 991px) {
+	.footer-buttons{
+		width: 100%;
+	}
+}
+
+table th, table td{
+	text-align: center;
+}
+
+
+.alert.am-fade {
+	opacity: 1;
+	transition: opacity .15s linear;
+	&.ng-enter {
+		opacity: .5;
+		&.ng-enter-active {
+			opacity: 1;
+		}
+	}
+	
+	&.ng-leave {
+		opacity: .5;
+		&.ng-leave-active {
+			opacity: 0;
+		}
+	}
+}
+
+.tag-item{
+	background: #e84e40 !important;
+	background-clip: padding-box !important;
+	display: inline !important;
+	padding: .2em .6em .3em !important;
+	font-size: 90% !important;
+	font-weight: bold !important;
+	line-height: 1 !important;
+	color: #fff !important;
+	text-align: center !important;
+	white-space: nowrap !important;
+	vertical-align: baseline !important;
+	border-radius: .25em !important;
+	border: none !important;
+	padding-top: 5px !important;
+}
+
+.tag-item a{
+	color: white !important;
+}
+
+.input-append .btn {
+    float: none !important;
+    margin-left: 0 !important;
+}
+
+.menu-items li:first-child a{
+	border-top: 2px solid #e7ebee;
+}
+
+.menu-items li:last-child a{
+	border-bottom: 2px solid #e7ebee !important;
+}
+
+.menu-items li.active{	
+	border-left: 5px solid #e84e40;
+}
+
+.horizontal-tags .host{
+	border-top: 2px solid #e7ebee;
+	margin-top: 0;
+}
+
+.horizontal-tags .tags{
+	-moz-appearance: none; // added this
+	-webkit-appearance: none; // added this
+	border: none;
+	box-shadow: none;
+}
+
+.horizontal-tags .tags .tag-item {
+	line-height: 24px !important;
+	width: 99%;
+	height: 35px !important;
+}
+
+.horizontal-tags .tags .tag-item span{
+	float: left;
+	font-size: 12px;
+	max-width: 90%;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.horizontal-tags .tags .tag-item .remove-button{
+	float: right;
+	margin-top: 0px;
+	font-size: 20px;
+}
+
+.horizontal-tags.success .tag-item{
+	background: #8bc34a !important;
+}
+
+.horizontal-tags.default .tag-item{
+	background: #90a4ae !important;
+}
+
+#login-logo {
+  background: none repeat scroll 0 0 #e84e40 !important;
+}

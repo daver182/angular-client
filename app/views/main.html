@@ -1,1 +1,130 @@
-<h1>Main</h1>
+<h1>Lista de evaluaciones</h1>
+<div class="row">
+
+</div>
+<div class="row">
+	<div class="col-sm-4">
+		<div class="main-box clearfix">
+			<header class="main-box-header clearfix">
+				<h2 class="pull-left">Filtrar resultados</h2>
+			</header>
+
+			<div class="main-box-body clearfix">
+				<div class="row">
+
+				</div>
+				<form class="form">
+					<div class="form-group">
+						<label for="exampleInputName2">Nombre</label>
+						<input type="text" class="form-control" ng-model="filtro.nombre" placeholder="Nombre del trabajador">
+					</div>
+					<div class="form-group">
+						<label for="exampleInputEmail2">Fecha de evaluación:</label>
+						<div class="row">
+							<div class="col-xs-6"><input type="text" name="fecha_evaluación" class="form-control" ng-model="filtro.fecha_evaluacion_desde" required b-datepicker placeholder="Entre 00/00/0000"></div>
+							<div class="col-xs-6"><input type="text" name="fecha_evaluación" class="form-control" ng-model="filtro.fecha_evaluacion_hasta" required b-datepicker placeholder="Hasta 00/00/0000"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label>Empresa mandante:</label>
+						<angucomplete-alt id="empresas"
+							placeholder="Empresa mandante"
+							pause="400"
+							selected-object="mandante"
+							remote-url="http://preview.snh7fujp32384cxrlmffilcvx3q2rzfrd95a1oi3qlgqr529.box.codeanywhere.com/public/empresa/buscar?texto="
+							title-field="razon_social"
+							input-class="form-control"
+							name="empresa"/>
+					</div>
+
+					<div class="form-group">
+						<label>Empresa contratista:</label>
+						<angucomplete-alt id="empresas"
+							placeholder="Empresa contratista"
+							pause="400"
+							selected-object="contratista"
+							remote-url="http://preview.snh7fujp32384cxrlmffilcvx3q2rzfrd95a1oi3qlgqr529.box.codeanywhere.com/public/empresa/buscar?texto="
+							title-field="razon_social"
+							input-class="form-control"
+							name="empresa"/>
+					</div>
+					<button type="button" class="btn btn-primary" ng-click="filtrar()">Filtrar</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-8">
+		<div class="main-box clearfix">
+			<header class="main-box-header clearfix">
+				<h2 class="pull-left">Evaluaciones</h2>
+			</header>
+
+			<div class="main-box-body clearfix">
+				<div class="row">
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-repeat="evaluacion in evaluaciones">
+						<div class="main-box clearfix project-box red-box">
+							<div class="main-box-body clearfix">
+								<div class="project-box-header gray-bg">
+									<div class="row">
+										<div class="col-xs-6">
+											{{evaluacion.nombres}} {{evaluacion.apellidos}}
+											{{evaluacion.rut}}
+										</div>
+										<div class="col-xs-6">
+
+										</div>
+									</div>
+									<div class="">
+										<a ui-sref="home.resumen({ id: evaluacion.id })" style="font-size: 1.3em;">
+											{{evaluacion.nombres}} {{evaluacion.apellidos}}
+										</a>
+									</div>
+								</div>
+								<!--<div class="project-box-header" ng-class="{'green-bg': evaluacion.estado_evaluacion_id === '1', 'yellow-bg': evaluacion.estado_evaluacion_id === '2', 'red-bg': evaluacion.estado_evaluacion_id === '3' }">
+									<div class="name">
+										<a ui-sref="home.resumen({ id: evaluacion.id })" style="font-size: 1.3em;">
+											{{evaluacion.nombres}} {{evaluacion.apellidos}}
+										</a>
+									</div>
+								</div>
+
+								<div class="row" style="margin-left: 0;margin-right: 0;">
+									<div class="col-sm-5" style="padding-left: 15px;">
+										<div style="padding: 15px 0;">
+											<img ng-if="evaluacion.imagen" ng-src="{{rutaBase + evaluacion.imagen}}" style="width: 100%;border-radius: 4px;" src="http://www.hvacsite.com/assets/misc/no-avatar-62-d18c4750a2d78a5b251023a3dd99e28b.png" alt="">
+											<img ng-if="!evaluacion.imagen"  style="width: 100%;border-radius: 4px;" src="http://www.hvacsite.com/assets/misc/no-avatar-62-d18c4750a2d78a5b251023a3dd99e28b.png" alt="">
+										</div>
+									</div>
+									<div class="col-sm-7">
+										<div  style="  padding: 0 20px;  border-left: 1px solid #eee;  height: 110px;  margin-top: 15px;">
+											<div style="border-bottom: 1px solid #eee;  color: #212121;  display: block;  float: left;  padding: 5px 10px;  text-align: center;  width: 100%;  margin-top: 5px;">
+												<span class="value" style="display: block;  font-size: 1.2em;  font-weight: 300;">{{evaluacion.rut | rut}}</span>
+												<span class="label" style="display: block;  font-size: 0.875em;  font-weight: 300;  color: #212121;">RUT</span>
+											</div>
+
+											<div style="border-bottom: none;  color: #212121;  display: block;  float: left;  padding: 5px 10px;  text-align: center;  width: 100%;">
+												<span class="value" style="display: block;  font-size: 1.2em;  font-weight: 300;">{{evaluacion.razon_social}}</span>
+												<span class="label" style="display: block;  font-size: 0.875em;  font-weight: 300;  color: #212121;">Empresa</span>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="project-box-ultrafooter clearfix">
+									<div class="link pull-left">
+										<i class="fa fa-calendar"> </i> {{evaluacion.fecha_evaluacion  | amDateFormat:'LL'}}
+									</div>
+								</div>-->
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-sm-12"><div style="margin-left: 8px;" paging page="paginaActual" page-size="cantidadPagina" total="total" paging-action="pagina(page)"></div></div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>

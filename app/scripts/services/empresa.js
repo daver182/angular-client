@@ -8,11 +8,11 @@
  * Service in the seedApp.
  */
 angular.module('seedApp').service('Empresa', function ($resource) {
-    return $resource(
-		'http://crosan-180346.sae1.nitrousbox.com/contratistas/public/empresa/:id', 
+	return $resource(
+		window.URL + '/empresa/:id',
 		{id:'@id'},
 		{
-			query: {method: 'GET', isArray: false},
+			query: { method: 'GET', isArray: false },
 			update: { method: 'PUT', isArray: false }
 		}
 	);
