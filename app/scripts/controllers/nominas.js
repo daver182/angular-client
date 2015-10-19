@@ -7,7 +7,7 @@
  * # NominasCtrl
  * Controller of the seedApp
  */
-angular.module('seedApp').controller('NominasCtrl', function ($scope, ngTableParams, Evaluacion) {
+angular.module('seedApp').controller('NominasCtrl', function ($scope, ngTableParams, Evaluacion, Autocomplete) {
     $scope.filtro = {};
     $scope.resultados = false;
     var filtered = false;
@@ -42,8 +42,8 @@ angular.module('seedApp').controller('NominasCtrl', function ($scope, ngTablePar
         $scope.resultados = false;
         query = {};
 
-        if($scope.filtro.nombre){
-			query.nombre = $scope.filtro.nombre;
+        if($scope.filtro.trabajador){
+			query.trabajador = $scope.filtro.trabajador.id;
 		}
 
 		if($scope.filtro.fecha_evaluacion_desde){
@@ -54,17 +54,25 @@ angular.module('seedApp').controller('NominasCtrl', function ($scope, ngTablePar
 			query.fecha_evaluacion_hasta = $scope.filtro.fecha_evaluacion_hasta;
 		}
 
-		if($scope.mandante){
-			query.mandante = $scope.mandante.originalObject.id;
+		if($scope.filtro.mandante){
+            query.mandante = $scope.filtro.mandante.id;
 		}
 
-		if($scope.contratista){
-			query.contratista = $scope.contratista.originalObject.id;
+		if($scope.filtro.contratista){
+			query.contratista = $scope.filtro.contratista.id;
 		}
-
-        //console.log($scope.tableParams);
 
         filtered = true;
         $scope.tableParams.reload();
 	}
+
+    $scope.empresas = [];
+	$scope.cargarEmpresas = function(nombre) {
+		Autocomplete.buscarEmpresa($scope, 'empresas', nombre);
+	};
+
+    $scope.trabajadores = [];
+	$scope.cargarTrabajadores = function(nombre) {
+		Autocomplete.buscarTrabajador($scope, 'trabajadores', nombre);
+	};
 });

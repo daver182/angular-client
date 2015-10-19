@@ -1,0 +1,69 @@
+<div class="row">
+	<div class="col-lg-12">
+		<ol class="breadcrumb">
+			<li><a href="" ui-sref="home.main">Inicio</a></li>
+			<li class="active"><span>Perfil</span></li>
+		</ol>
+	</div>
+</div>
+
+<form role="form" name="formularioPerfil" ng-submit="guardarPerfil(formularioPerfil.$valid)" novalidate>
+	<div class="row" style="margin-top: 10px;">
+		<div class="col-md-12">
+			<div class="main-box">
+				<header class="main-box-header clearfix">
+					<h2>Perfil</h2>
+				</header>
+
+				<div class="main-box-body clearfix">
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="form-group" ng-class="{ 'has-error' : validar('nombre') }">
+								<label><span class="required-field">*</span> Nombre:</label>
+								<input type="text" name="nombre" class="form-control" ng-model="perfil.nombre" required>
+							</div>
+
+							<div class="form-group" ng-class="{ 'has-error' : validar('email') }">
+								<label><span class="required-field">*</span> Email:</label>
+								<input type="email" name="email" class="form-control" ng-model="perfil.email" required>
+							</div>
+
+							<div class="form-group" ng-class="{ 'has-error' : validar('cargo') }">
+								<label><span class="required-field">*</span> Cargo:</label>
+								<input type="text" name="cargo" class="form-control" ng-model="perfil.cargo" required>
+							</div>
+
+							<div class="form-group" ng-class="{ 'has-error' : validar('password') }">
+								<label><span class="required-field">*</span> Contraseña:</label>
+								<input type="password" name="password" class="form-control" ng-model="perfil.password" required>
+							</div>
+
+							<div class="form-group" ng-class="{ 'has-error' : validar('confirm') }">
+								<label><span class="required-field">*</span> Confirmar contraseña:</label>
+								<input type="password" name="confirm" class="form-control" ng-model="perfil.confirm" required>
+							</div>
+						</div>
+					</div>
+
+					<span style="font-size: 10px;  display: block;  float: left;  margin-top: 15px;">Los campos con <span class="required-field">*</span> son requeridos</span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="main-box">
+				<div class="main-box-body clearfix" style="padding: 15px;">
+					<div class="pull-left">
+						<a class="btn btn-default" ng-href="#/">Volver</a>
+					</div>
+
+					<div class="pull-right">
+						<button style="float: right" type="submit" class="btn btn-primary" ng-disabled="!formularioPerfil.$valid">Guardar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>

@@ -8,28 +8,28 @@
 			<div class="main-box-body clearfix">
 				<div class="row">
 					<div class="col-sm-2">
-						<img ng-if="evaluacion.trabajador.imagen" ng-src="{{rutaBase + evaluacion.trabajador.imagen}}" alt="" class="profile-img img-responsive" />
-						<img ng-cloak ng-if="!evaluacion.trabajador.imagen" src="http://www.hvacsite.com/assets/misc/no-avatar-62-d18c4750a2d78a5b251023a3dd99e28b.png" alt="" class="profile-img img-responsive" />
+						<img ng-if="trabajador.imagen" ng-src="{{rutaBase + trabajador.imagen}}" alt="" class="profile-img img-responsive" />
+						<img ng-cloak ng-if="!trabajador.imagen" src="http://www.hvacsite.com/assets/misc/no-avatar-62-d18c4750a2d78a5b251023a3dd99e28b.png" alt="" class="profile-img img-responsive" />
 					</div>
 					<div class="col-sm-5">
 						
-						<h2>{{evaluacion.trabajador.nombres}} {{evaluacion.trabajador.apellidos}}</h2>
-						<p>{{evaluacion.trabajador.rut | rut}}</p>
+						<h2>{{trabajador.nombres}} {{trabajador.apellidos}}</h2>
+						<p>{{trabajador.rut | rut}}</p>
 						<div class="row">
 							<div class="col-sm-4"><strong>Empresa:</strong></div>
-							<div class="col-sm-8" style="text-align: left;">{{evaluacion.trabajador.empresa.razon_social}}</div>
+							<div class="col-sm-8" style="text-align: left;">{{trabajador.empresa.razon_social}}</div>
 						</div>
 						<div class="row">
 							<div class="col-sm-4"><strong>Edad:</strong></div>
-							<div class="col-sm-8" style="text-align: left;">{{evaluacion.trabajador.edad}}</div>
+							<div class="col-sm-8" style="text-align: left;">{{trabajador.edad}}</div>
 						</div>
 						<div class="row">
 							<div class="col-sm-4"><strong>Nacionalidad:</strong></div>
-							<div class="col-sm-8" style="text-align: left;">{{evaluacion.trabajador.nacionalidad}}</div>
+							<div class="col-sm-8" style="text-align: left;">{{trabajador.nacionalidad}}</div>
 						</div>
-						<div class="row" ng-if="evaluacion.trabajador.correo">
+						<div class="row" ng-if="trabajador.correo">
 							<div class="col-sm-4"><strong>Correo:</strong></div>
-							<div class="col-sm-8" style="text-align: left;">{{evaluacion.trabajador.correo}}</div>
+							<div class="col-sm-8" style="text-align: left;">{{trabajador.correo}}</div>
 						</div>
 					</div>
 					<div class="col-sm-5" style="text-align: right;">

@@ -23,21 +23,21 @@
 	</div>
 </div>
 
-<div class="row" style="margin-top: 10px;">
-	<div class="col-md-12">
-		<div class="main-box">
-			<p class="pull-left" style="padding: 10px 0 0 20px;">
-				<a ui-sref="home.contratos">← Volver al listado de contratos</a>
-			</p>
-			<p class="pull-right" style="padding: 10px 20px 0 0;">
-				<a ui-sref="home.nuevoContrato">Crear un nuevo contrato</a>
-			</p>
-			<header class="main-box-header clearfix">
-				<h2>Datos del contrato</h2>
-			</header>
-			
-			<div class="main-box-body clearfix">
-				<form role="form" name="formularioContrato" ng-submit="guardarContrato(formularioContrato.$valid)" novalidate>
+<form role="form" name="formularioContrato" ng-submit="guardarContrato(formularioContrato.$valid)" novalidate>
+	<div class="row" style="margin-top: 10px;">
+		<div class="col-md-12">
+			<div class="main-box">
+				<p class="pull-left" style="padding: 10px 0 0 20px;">
+					<a ui-sref="home.contratos">← Volver al listado de contratos</a>
+				</p>
+				<p class="pull-right" style="padding: 10px 20px 0 0;">
+					<a ui-sref="home.nuevoContrato">Crear un nuevo contrato</a>
+				</p>
+				<header class="main-box-header clearfix">
+					<h2>Datos del contrato</h2>
+				</header>
+
+				<div class="main-box-body clearfix">
 					<div class="row">
 						<div class="col-sm-6">
 							<div class="form-group" ng-class="{ 'has-error' : validar('denominacion') }">
@@ -78,7 +78,7 @@
 
 							<div class="form-group" ng-class="{ 'has-error' : !empresaValida }">
 								<label><span class="required-field">*</span> Mandante:</label>
-								<angucomplete-alt id="mandantes"
+								<!--<angucomplete-alt id="mandantes"
 									placeholder="Buscar empresas"
 									pause="400"
 									selected-object="empresaSeleccionada"
@@ -86,26 +86,49 @@
 									remote-url="http://preview.snh7fujp32384cxrlmffilcvx3q2rzfrd95a1oi3qlgqr529.box.codeanywhere.com/public/empresa/buscar?texto="
 									title-field="razon_social"
 									input-class="form-control"
-									name="mandante"/>
+									name="mandante"/>-->
+								<ui-select ng-model="select.empresa"
+									theme="bootstrap"
+									ng-disabled="disabled"
+									reset-search-input="false"
+									title="Buscar empresas">
+									<ui-select-match allow-clear="" placeholder="Buscar una empresa...">{{$select.selected.razon_social}}</ui-select-match>
+									<ui-select-choices repeat="empresa in empresas track by $index"
+										refresh="cargarEmpresas($select.search)"
+										refresh-delay="0">
+										<div ng-bind-html="empresa.razon_social | highlight: $select.search"></div>
+									</ui-select-choices>
+								</ui-select>
 							</div>
-							
+
 							<div class="form-group">
 								<label><span class="required-field">*</span> Faenas a desempeñarse:</label>
-								<tags-input class="form-group" name="faenas" replace-spaces-with-dashes="false" keyProperty="id" ng-model="contrato.faenas">
+								<tags-input class="form-group" name="faenas" replace-spaces-with-dashes="false" keyProperty="id" ng-model="contrato.faenas" placeholder="Buscar faenas">
 									<auto-complete source="cargarFaenas($query)" key-property="id" display-property="text"></auto-complete>
 								</tags-input>
 							</div>
-							
 						</div>
 					</div>
 
 					<span style="font-size: 10px;  display: block;  float: left;  margin-top: 15px;">Los campos con <span class="required-field">*</span> son requeridos</span>
-					<button style="float: right" type="submit" class="btn btn-primary" ng-disabled="!formularioContrato.$valid">Guardar y continuar</button>
-					
-
-				</form>
+				</div>
 			</div>
 		</div>
 	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="main-box">
+				<div class="main-box-body clearfix" style="padding: 15px;">
+					<div class="pull-left">
+						<a class="btn btn-default" ng-href="#/contratos">Volver</a>
+					</div>
+
+					<div class="pull-right">
+						<button style="float: right" type="submit" class="btn btn-primary" ng-disabled="!formularioContrato.$valid">Guardar y continuar</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-</div>
+</form>

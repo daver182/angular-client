@@ -7,7 +7,7 @@
  * # HomeCtrl
  * Controller of the seedApp
  */
-angular.module('seedApp').controller('MainCtrl', function ($scope, Evaluacion) {
+angular.module('seedApp').controller('MainCtrl', function ($scope, Evaluacion, Autocomplete) {
 	$scope.rutaBase = window.URL + '/adjuntos/trabajadores/';
 
 	$scope.paginaActual = 1;
@@ -28,8 +28,8 @@ angular.module('seedApp').controller('MainCtrl', function ($scope, Evaluacion) {
 			sorting: 'asc'
 		}
 
-		if($scope.filtro.nombre){
-			query.nombre = $scope.filtro.nombre;
+		if($scope.filtro.trabajador){
+			query.trabajador = $scope.filtro.trabajador.id;
 		}
 
 		if($scope.filtro.fecha_evaluacion_desde){
@@ -40,12 +40,12 @@ angular.module('seedApp').controller('MainCtrl', function ($scope, Evaluacion) {
 			query.fecha_evaluacion_hasta = $scope.filtro.fecha_evaluacion_hasta;
 		}
 
-		if($scope.mandante){
-			query.mandante = $scope.mandante.originalObject.id;
+		if($scope.filtro.mandante){
+			query.mandante = $scope.filtro.mandante.id;
 		}
 
-		if($scope.contratista){
-			query.contratista = $scope.contratista.originalObject.id;
+		if($scope.filtro.contratista){
+			query.contratista = $scope.filtro.contratista.id;
 		}
 
 		var evaluaciones = Evaluacion.query(query);
@@ -59,4 +59,14 @@ angular.module('seedApp').controller('MainCtrl', function ($scope, Evaluacion) {
 		$scope.paginaActual = 1;
 		obtenerEvaluaciones();
 	}
+
+	$scope.empresas = [];
+	$scope.cargarEmpresas = function(nombre) {
+		Autocomplete.buscarEmpresa($scope, 'empresas', nombre);
+	};
+
+    $scope.trabajadores = [];
+	$scope.cargarTrabajadores = function(nombre) {
+		Autocomplete.buscarTrabajador($scope, 'trabajadores', nombre);
+	};
 });

@@ -7,13 +7,12 @@
  * # Contrato
  * Service in the seedApp.
  */
-angular.module('seedApp').service('Contrato', function ($resource) {
-	return $resource(
+angular.module('seedApp').service('Contrato', function (Resource) {
+	return Resource(
 		window.URL + '/contrato/:id', 
 		{ id: '@id' },
 		{
 			query: { method: 'GET', isArray: false },
-			update: { method: 'PUT', isArray: false },
 			verFaenasAutorizadas: { method:'GET', params: { id: '@id' }, isArray: true, url: window.URL + '/contrato/:id/faenas_autorizadas' },
 			verContratistas: { method:'GET', params: { id: '@id' }, isArray: true, url: window.URL + '/contrato/:id/contratistas' },
 			guardarContratista: { method:'POST', params: { id: '@id' }, isArray: true, url: window.URL + '/contrato/:id/contratistas' },

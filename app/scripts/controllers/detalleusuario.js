@@ -9,19 +9,24 @@
  */
 angular.module('seedApp').controller('DetalleusuarioCtrl', function ($scope, $http, $stateParams, Usuario, TipoUsuario, Toast, $location, Autocomplete) {
 	$scope.submitted = false;
-
+	$scope.select = { empresa: {} };
 	$scope.tiposUsuario = TipoUsuario.query();
 
 	if($stateParams.id){
-		$scope.usuario = Usuario.get({id: $stateParams.id});
+		$scope.usuario = Usuario.get({id: $stateParams.id}, function(){
+			$scope.select.empresa = {
+				id: $scope.usuario.empresa_id,
+				razon_social: $scope.usuario.nombre_empresa
+			}
+		});
 	}else{
 		$scope.usuario = new Usuario();
 	}
 
 	$scope.guardarUsuario = function(isValid){
 		$scope.submitted = true;
-		if($scope.empresaSeleccionada){
-			$scope.usuario.empresa_id = $scope.empresaSeleccionada.id;
+		if($scope.select.empresa){
+			$scope.usuario.empresa_id = $scope.select.empresa.id;
 		}
 
 		if (isValid) {
@@ -41,7 +46,7 @@ angular.module('seedApp').controller('DetalleusuarioCtrl', function ($scope, $ht
 						$scope.usuario = usuario;
 						Toast.success('El usuario ha sido creado con exito.', 'Datos guardados');
 
-						$location.path("/usuarios/detalle/" + usuario.id);
+						$location.path('/usuarios/detalle/' + usuario.id);
 					}else{
 						Toast.error('Ocurrio un error al guardar. Intentelo de nuevo.', 'Ocurrió un error');
 					}
@@ -56,6 +61,6 @@ angular.module('seedApp').controller('DetalleusuarioCtrl', function ($scope, $ht
 
 	$scope.empresas = [];
 	$scope.cargarEmpresas = function(nombre) {
-		Autocomplete.buscarEmpresa($scope, nombre);
+		Autocomplete.buscarEmpresa($scope, 'empresas', nombre);
 	};
 });

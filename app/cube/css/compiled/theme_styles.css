@@ -1095,7 +1095,7 @@ h1 small, h2 small, h3 small, h1 .small, h2 .small, h3 .small {
 /* BUTTONS */
 .btn {
   border: none;
-  padding: 6px 12px;
+  /*padding: 6px 12px;*/
   border-bottom: 2px solid;
   transition: border-color 0.1s ease-in-out 0s, background-color 0.1s ease-in-out 0s;
   outline: none;

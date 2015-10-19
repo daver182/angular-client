@@ -10,10 +10,13 @@
 angular.module('seedApp').controller('HabilitacionesevaluacionCtrl', function ($scope, $stateParams, Trabajador, Evaluacion, Requisito, Estadorequisito, $http, $state, Toast, Upload, notificationService, Habilidad, Habilitacion) {
 	if($stateParams.id){
 		$scope.evaluacion = Evaluacion.get({ id: $stateParams.id }, function(){
-			var fechaNacimiento = new Date($scope.evaluacion.trabajador.fecha_nacimiento.split('/')[2], $scope.evaluacion.trabajador.fecha_nacimiento.split('/')[1], $scope.evaluacion.trabajador.fecha_nacimiento.split('/')[0]);
-			var hoy = new Date();
+			$scope.trabajador = Trabajador.get({ id:  $scope.evaluacion.trabajadorId }, function(){
+				var fechaNacimiento = new Date($scope.trabajador.fecha_nacimiento);
+				var hoy = new Date();
 
-			$scope.evaluacion.trabajador.edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+				$scope.trabajador.edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+			});
+			
 			$scope.requisitosEvaluacion = Evaluacion.verRequisitos({ id: $scope.evaluacion.id }, function(a){});
 			$scope.habilitaciones = Evaluacion.verHabilitaciones({id: $scope.evaluacion.id });
 			$scope.restricciones = Evaluacion.verRestricciones({id: $scope.evaluacion.id });

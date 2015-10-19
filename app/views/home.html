@@ -26,11 +26,11 @@
 				<ul class="nav navbar-nav pull-right">
 					<li dropdown class="profile-dropdown">
 						<a href="#" dropdown-toggle>
-							<img ng-src="{{rutaBase + 'adjuntos/empresas/' + user.logo}}" alt=""/>
+							<img ng-cloak ng-src="{{rutaBase + 'adjuntos/empresas/' + user.logo}}" alt=""/>
 							<span class="hidden-xs">{{user.nombre}}</span> <b class="caret"></b>
 						</a>
 						<ul class="dropdown-menu  dropdown-menu-right">
-							<li><a href=""><i class="fa fa-user"></i>Perfil</a></li>
+							<li><a href="" ui-sref="home.perfil"><i class="fa fa-user"></i>Perfil</a></li>
 							<li><a href="" ui-sref="logout"><i class="fa fa-power-off"></i>Logout</a></li>
 						</ul>
 					</li>

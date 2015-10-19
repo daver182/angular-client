@@ -12,10 +12,12 @@ angular.module('seedApp').controller('DetalletrabajadorCtrl', function ($scope, 
 	$scope.empresaValida = true;
 	$scope.role = Role.get();
 
+	$scope.select = { empresa: {} };
+
 	if($stateParams.id){
 		$scope.disabled = true;
 		$scope.trabajador = Trabajador.get({id: $stateParams.id}, function(){
-			$scope.empresaSeleccionada = $scope.trabajador.empresa;
+			$scope.select.empresa = $scope.trabajador.empresa;
 		}, function(response){
 			if(response.status === 403){
 				$state.go('home.trabajadores');
@@ -29,11 +31,12 @@ angular.module('seedApp').controller('DetalletrabajadorCtrl', function ($scope, 
 
 	$scope.guardarTrabajador = function(isValid){
 		$scope.empresaValida = true;
-		if(!$scope.empresaSeleccionada) {
+		if(!$scope.select.empresa) {
 			return $scope.empresaValida = false;
 		}
 
-		$scope.trabajador.empresa = $scope.empresaSeleccionada.id;
+		console.log($scope.select);
+		$scope.trabajador.empresa_id = $scope.select.empresa.id;
 
 		$scope.submitted = true;
 		if (isValid) {
@@ -77,10 +80,4 @@ angular.module('seedApp').controller('DetalletrabajadorCtrl', function ($scope, 
 	$scope.validar = function(field){
 		return $scope.formularioTrabajador[field].$invalid && !$scope.formularioTrabajador[field].$pristine;
 	}
-
-	/*$scope.empresas = [];
-	$scope.cargarEmpresas = function(nombre) {
-		Autocomplete.buscarEmpresa($scope, nombre);
-	};*/
-
 });

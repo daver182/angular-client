@@ -10,19 +10,22 @@
 angular.module('seedApp').service('Toast', function (notificationService) {
     return {
     	success: function(title, description){
-    		notificationService.notifyWithDefaults({
-				title: title,
-				text: description,
-				type: 'success'
-			});
+            var data = {
+                type: 'success'
+            };
+            if(title) data.title = title;
+            if(description) data.text = description;
+
+            notificationService.notifyWithDefaults(data);
     	},
-    	error: function(description, title){
-    		title = 'Ocurrió un error';
-    		notificationService.notifyWithDefaults({
-				title: title,
-				text: description,
-				type: 'error'
-			});
+    	error: function(title, description){
+            var data = {
+                title: 'Ocurrió un error',
+                type: 'error'
+            };
+            if(description) data.text = description;
+
+            notificationService.notifyWithDefaults(data);
     	}
     }
 });

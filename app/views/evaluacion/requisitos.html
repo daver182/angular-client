@@ -31,31 +31,31 @@
 				<div class="main-box-body clearfix">
 					<div class="profile-box-header red-bg clearfix">
 						<div style="position: relative;">
-							<img ng-if="evaluacion.trabajador.imagen" ng-src="{{rutaBase + 'adjuntos/trabajadores/' +evaluacion.trabajador.imagen}}" alt="" class="profile-img img-responsive" />
-							<img ng-if="!evaluacion.trabajador.imagen" src="http://www.hvacsite.com/assets/misc/no-avatar-62-d18c4750a2d78a5b251023a3dd99e28b.png" alt="" class="profile-img img-responsive" />
-							
+							<img ng-if="trabajador.imagen" ng-src="{{rutaBase + 'adjuntos/trabajadores/' + trabajador.imagen}}" alt="" class="profile-img img-responsive" />
+							<img ng-if="!trabajador.imagen" src="http://www.hvacsite.com/assets/misc/no-avatar-62-d18c4750a2d78a5b251023a3dd99e28b.png" alt="" class="profile-img img-responsive" />
+
 							<div  alt="" style="position: absolute;opacity: 0.4;top: 45px;left: 40px;">
 								<button ng-hide="avatar.subiendo" accept="'image/*'" ngf-accept="'image/*'" ngf-select ngf-change="subirAvatar($files, $event)" style="background-color: transparent;  border: none;  padding: 0;  outline: none;">
 									<i class="fa fa-cloud-upload" style="font-size: 30px;"></i>
 								</button>
 
-								<i ng-show="avatar.subiendo" class="fa fa-spinner" style="font-size: 30px; webkit-animation: rotating 3s linear infinite;  -moz-animation: rotating 3s linear infinite;  -ms-animation: rotating 3s linear infinite;  -o-animation: rotating 3s linear infinite;  animation: rotating 3s linear infinite;"></i>
+								<i ng-show="avatar.subiendo" class="fa fa-refresh" style="font-size: 30px; webkit-animation: rotating 3s linear infinite;  -moz-animation: rotating 3s linear infinite;  -ms-animation: rotating 3s linear infinite;  -o-animation: rotating 3s linear infinite;  animation: rotating 3s linear infinite;"></i>
 							</div>
 						</div>
-						
-						<h2>{{evaluacion.trabajador.nombres}} {{evaluacion.trabajador.apellidos}}</h2>
+
+						<h2>{{trabajador.nombres}} {{trabajador.apellidos}}</h2>
 						<div class="job-position">
-							{{evaluacion.trabajador.rut | rut}}
+							{{trabajador.rut | rut}}
 						</div>
 						<ul class="contact-details">
 							<li>
-								<strong>Edad:</strong> {{evaluacion.trabajador.edad}}
+								<strong>Edad:</strong> {{ trabajador.edad }}
 							</li>
 							<li>
-								<strong>Licencias: </strong> <span ng-repeat="licencia in evaluacion.trabajador.licencias">{{licencia.text}}<span ng-if="!$last">,</span> </span> 
+								<strong>Licencias: </strong> <span ng-repeat="licencia in trabajador.licencias">{{licencia.text}}<span ng-if="!$last">,</span> </span>
 							</li>
 							<li>
-								<strong>Habilitado para: </strong> <span ng-repeat="faena in evaluacion.faenas">{{faena.text}}<span ng-if="!$last">,</span> </span> 
+								<strong>Habilitado para: </strong> <span ng-repeat="faena in evaluacion.faenas">{{faena.text}}<span ng-if="!$last">,</span> </span>
 							</li>
 						</ul>
 					</div>
@@ -70,7 +70,7 @@
 		<div class="main-box">
 			<header class="main-box-header clearfix">
 				<h2 class="pull-left">Requisitos de la evaluación</h2>
-				
+
 				<div class="filter-block pull-right">
 					<button class="btn btn-success pull-left" ng-click="agregarRequisito()"><i class="fa fa-plus"></i> Agregar requisito</button>
 					<!--<button class="btn btn-info pull-right" ng-click="guardarRequisitos()"><i class="fa fa-save"></i> Guardar requisitos</button>-->
@@ -105,10 +105,6 @@
 										<span class="text-info" ng-if="requisitoEvaluacion.subido && requisitoEvaluacion.archivoSeleccionado">{{requisitoEvaluacion.nombreArchivo}}</span>
 										<span class="text-success" ng-if="requisitoEvaluacion.subido && !requisitoEvaluacion.archivoSeleccionado">Adjuntado</span>
 									</div>
-									<!--<div class="text-info" ng-show="requisitoEvaluacion.archivoSeleccionado">{{requisitoEvaluacion.nombreArchivo}}</div>
-									<div class="text-success" ng-show="requisitoEvaluacion.subido">Adjuntado</div>
-									<div class="text-warning" ng-show="!requisitoEvaluacion.subido" ng-hide="!requisitoEvaluacion.archivoSeleccionado && requisitoEvaluacion.subido">Vacio</div>-->
-									
 									<div class="progress" ng-show="requisitoEvaluacion.subiendo">
 										<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" ng-style="{ 'width' : requisitoEvaluacion.width }">
 											<span class="sr-only">{{requisitoEvaluacion.progreso}}% Completado</span>

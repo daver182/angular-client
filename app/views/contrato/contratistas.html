@@ -4,20 +4,21 @@
 			<div class="pull-left">
 				<ol class="breadcrumb">
 					<li><a ui-sref="home.main">Home</a></li>
+					<li><a ng-href="#/contratos">Lista de contratos</a></li>
 					<li><a ng-href="#/contratos/detalle/{{contrato.id}}">Detalle de contrato</a></li>
 					<li class="active"><span>Contratistas</span></li>
 				</ol>
-				
+
 				<h1>Contratistas</h1>
 			</div>
 
 			<div class="pull-right hidden-xs">
 				<div class="xs-graph pull-left">
-					<a ng-href="#/contratos/detalle/{{contrato.id}}">Volver</a>
+
 				</div>
 
 				<div class="xs-graph pull-left mrg-l-lg mrg-r-sm">
-					<button class="btn btn-success">Guardar y salir</button>
+
 				</div>
 			</div>
 		</div>
@@ -29,11 +30,56 @@
 	<div class="col-md-12">
 		<div class="main-box">
 			<header class="main-box-header clearfix">
-				<h2>Datos del mandante</h2>
-				<p>{{contrato.mandante.razon_social}}</p>
-				<p>{{contrato.nombre_administrador}}</p>
+				<img style="width: 100px; margin-left: 20px;" class="pull-right" ng-src="http://preview.snh7fujp32384cxrlmffilcvx3q2rzfrd95a1oi3qlgqr529.box.codeanywhere.com/public/adjuntos/empresas/165602064.png" alt="">
+				<div class="pull-right">
+					<h4 style="text-align: right; margin-top: 25px; font-weight: bold; font-size: 20px;">{{contrato.mandante.razon_social}}</h4>
+					<p style="text-align: right;">
+						<span ng-show="contrato.nombre_administrador">{{contrato.nombre_administrador}}</span>
+						<span ng-show="contrato.telefono_administrador">- {{contrato.telefono_administrador}}</span>
+						<span ng-show="contrato.email_administrador">- {{contrato.email_administrador}}</span>
+					</p>
+				</div>
 
-				
+
+			</header>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="main-box">
+			<header class="main-box-header clearfix" style="padding: 20px 20px 10px 20px;">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="row">
+							<div class="col-xs-6">
+								<p style="text-align: right; font-weight: bold;">Denominación Contrato :</p>
+								<p style="text-align: right; font-weight: bold;">Serie Identificación :</p>
+								<p style="text-align: right; font-weight: bold;">Rut del Mandante :</p>
+							</div>
+							<div class="col-xs-6">
+								<p style="text-align: left;">{{contrato.denominacion}}</p>
+								<p style="text-align: left;">{{contrato.serie_identificacion}}</p>
+								<p style="text-align: left;">{{contrato.mandante.rut}}</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="row">
+							<div class="col-xs-6">
+								<p style="text-align: right; font-weight: bold;">Fecha Inicio Contrato :</p>
+								<p style="text-align: right; font-weight: bold;">Fecha Termino Contrato :</p>
+								<p style="text-align: right; font-weight: bold;">Administrador de Contrato :</p>
+							</div>
+							<div class="col-xs-6">
+								<p style="text-align: left;">{{contrato.fecha_inicio | amDateFormat:'DD [de] MMMM [de] YYYY'}}</p>
+								<p style="text-align: left;">{{contrato.fecha_termino | amDateFormat:'DD [de] MMMM [de] YYYY'}}</p>
+								<p style="text-align: left;">{{contrato.nombre_administrador}}</p>
+							</div>
+						</div>
+					</div>
+				</div>
 			</header>
 		</div>
 	</div>
@@ -69,10 +115,10 @@
 				<h2>Contratistas Autorizados</h2>
 				<p>Listado de los contratistas para trabajar en la faena seleccionada:</p>
 			</header>
-	
+
 			<div class="main-box clearfix profile-box-menu">
 				<div class="form-group">
-					<tags-input 
+					<tags-input
 						class="form-group horizontal-tags"
 						name="contratistas"
 						replace-spaces-with-dashes="false"
@@ -81,6 +127,7 @@
 						on-tag-removed="removeContratista($tag)"
 						add-from-autocomplete-only="true"
 						ng-model="contratistasAutorizados"
+						placeholder="Añadir un contratista" 
 						>
 						<auto-complete source="buscarEmpresas($query)" key-property="id" display-property="text"></auto-complete>
 					</tags-input>
@@ -90,6 +137,18 @@
 	</div>
 </div>
 
-<!--
+<div class="row">
+	<div class="col-md-12">
+		<div class="main-box">
+			<div class="main-box-body clearfix" style="padding: 15px;">
+				<div class="pull-left">
+					<a class="btn btn-default" ng-href="#/contratos/detalle/{{contrato.id}}">Volver</a>
+				</div>
 
--->
+				<div class="pull-right">
+					<a class="btn btn-success" ng-href="#/contratos">Guardar y salir</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

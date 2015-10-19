@@ -121,12 +121,12 @@
 										<div ng-bind-html="empresa.razon_social | highlight: $select.search"></div>
 									</ui-select-choices>
 								</ui-select>-->
-								<ui-select ng-model="$parent.$parent.empresaSeleccionada" autocomplete-empresa></ui-select>
+								<ui-select ng-model="select.empresa" autocomplete-empresa></ui-select>
 							</div>
 
 							<div class="form-group">
 								<label>Licencias:</label>
-								<tags-input class="form-group" name="licencias" min-length="1" replace-spaces-with-dashes="false" keyProperty="id" ng-model="trabajador.licencias">
+								<tags-input class="form-group" name="licencias" min-length="1" replace-spaces-with-dashes="false" keyProperty="id" ng-model="trabajador.licencias" placeholder="Añadir una licencia">
 									<auto-complete min-length="1" source="cargarLicencias($query)" key-property="id" display-property="text"></auto-complete>
 								</tags-input>
 							</div>

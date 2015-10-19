@@ -27,11 +27,8 @@ angular.module('seedApp').directive('bDatepicker', function () {
 				controller.$render = function() {
 					if(controller.$viewValue){
 						element.datepicker(options).on('changeDate', updateModel);
-						var date = controller.$viewValue.split('/');
-						//element.datepicker(options).data().datepicker.date = controller.$viewValue;
-						//element.datepicker(options).data().datepicker.date = new Date();
-						//element.datepicker('setValue');
-						element.datepicker('update', new Date(parseInt(date[2]), parseInt(date[1]) - 1, parseInt(date[0])));
+						var date = controller.$viewValue.split('-');
+						element.datepicker('update', new Date(parseInt(date[0]), parseInt(date[1]) - 1, parseInt(date[2])));
 						return controller.$viewValue;
 					}
 				};
@@ -41,5 +38,5 @@ angular.module('seedApp').directive('bDatepicker', function () {
 				return element.datepicker(options).on('changeDate', updateModel);
 			});
 		}
-	}; 
+	};
 });

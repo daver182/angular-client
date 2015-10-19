@@ -23,39 +23,57 @@
 				<form class="form">
 					<div class="form-group">
 						<label for="exampleInputName2">Nombre</label>
-						<input type="text" class="form-control" ng-model="filtro.nombre" placeholder="Nombre del trabajador">
+						<ui-select ng-model="filtro.trabajador"
+							theme="bootstrap"
+							reset-search-input="false"
+							title="Buscar trabajador">
+							<ui-select-match allow-clear="" placeholder="Buscar trabajador...">{{$select.selected.nombre}}</ui-select-match>
+							<ui-select-choices repeat="trabajador in trabajadores track by $index"
+								refresh="cargarTrabajadores($select.search)"
+								refresh-delay="0">
+								<div ng-bind-html="trabajador.nombre | highlight: $select.search"></div>
+							</ui-select-choices>
+						</ui-select>
 					</div>
 					<div class="form-group">
 						<label for="exampleInputEmail2">Fecha de evaluación:</label>
 						<div class="row">
-							<div class="col-xs-6"><input type="text" name="fecha_evaluación" class="form-control" ng-model="filtro.fecha_evaluacion_desde" required b-datepicker placeholder="Entre 00/00/0000"></div>
-							<div class="col-xs-6"><input type="text" name="fecha_evaluación" class="form-control" ng-model="filtro.fecha_evaluacion_hasta" required b-datepicker placeholder="Hasta 00/00/0000"></div>
+							<div class="col-xs-6"><input type="text" name="fecha_evaluación" class="form-control" ng-model="filtro.fecha_evaluacion_desde" required b-datepicker placeholder="Desde"></div>
+							<div class="col-xs-6"><input type="text" name="fecha_evaluación" class="form-control" ng-model="filtro.fecha_evaluacion_hasta" required b-datepicker placeholder="Hasta"></div>
 						</div>
 					</div>
 					<div class="form-group">
 						<label>Empresa mandante:</label>
-						<angucomplete-alt id="empresas"
-							placeholder="Empresa mandante"
-							pause="400"
-							selected-object="mandante"
-							remote-url="http://preview.snh7fujp32384cxrlmffilcvx3q2rzfrd95a1oi3qlgqr529.box.codeanywhere.com/public/empresa/buscar?texto="
-							title-field="razon_social"
-							input-class="form-control"
-							name="empresa"/>
+						<ui-select ng-model="filtro.mandante"
+							theme="bootstrap"
+							ng-disabled="disabled"
+							reset-search-input="false"
+							title="Buscar empresas">
+							<ui-select-match allow-clear="" placeholder="Buscar una empresa mandante...">{{$select.selected.razon_social}}</ui-select-match>
+							<ui-select-choices repeat="empresa in empresas track by $index"
+								refresh="cargarEmpresas($select.search)"
+								refresh-delay="0">
+								<div ng-bind-html="empresa.razon_social | highlight: $select.search"></div>
+							</ui-select-choices>
+						</ui-select>
 					</div>
 
 					<div class="form-group">
 						<label>Empresa contratista:</label>
-						<angucomplete-alt id="empresas"
-							placeholder="Empresa contratista"
-							pause="400"
-							selected-object="contratista"
-							remote-url="http://preview.snh7fujp32384cxrlmffilcvx3q2rzfrd95a1oi3qlgqr529.box.codeanywhere.com/public/empresa/buscar?texto="
-							title-field="razon_social"
-							input-class="form-control"
-							name="empresa"/>
+						<ui-select ng-model="filtro.contratista"
+							theme="bootstrap"
+							ng-disabled="disabled"
+							reset-search-input="false"
+							title="Buscar empresas">
+							<ui-select-match allow-clear="" placeholder="Buscar una empresa contratista...">{{$select.selected.razon_social}}</ui-select-match>
+							<ui-select-choices repeat="empresa in empresas track by $index"
+								refresh="cargarEmpresas($select.search)"
+								refresh-delay="0">
+								<div ng-bind-html="empresa.razon_social | highlight: $select.search"></div>
+							</ui-select-choices>
+						</ui-select>
 					</div>
-					<button type="button" class="btn btn-primary" ng-click="filtrar()">Filtrar</button>
+					<button type="button" class="btn btn-primary" ng-click="filtrar()"><i class="fa fa-search"></i> Filtrar</button>
 				</form>
 			</div>
 		</div>
@@ -70,7 +88,6 @@
 			</header>
 
 			<div class="main-box-body clearfix" ng-show="resultados">
-                <a class="btn btn-primary" ng-mousedown="csv.generate()" ng-href="{{ csv.link() }}" download="test.csv">Exportar</a>
 				<div class="table-responsive">
 					<table ng-table="tableParams" show-filter="false" class="table" export-csv="csv">
 						<tbody>
@@ -85,10 +102,10 @@
 									{{ nomina.cargo }}
 								</td>
 								<td data-title="'Fecha de evaluación'">
-									{{ nomina.fecha_evaluacion }}
+									{{ nomina.fecha_evaluacion | amDateFormat:'d/MM/YYYY' }}
 								</td>
 								<td data-title="'Fecha de vigencia'">
-									{{ nomina.fecha_vigencia }}
+									{{ nomina.fecha_vigencia | amDateFormat:'d/MM/YYYY' }}
 								</td>
 								<td data-title="'Empresa'">
 									{{ nomina.razon_social }}
@@ -97,6 +114,8 @@
 						</tbody>
 					</table>
 				</div>
+
+				 <a class="btn btn-primary pull-right" style="margin-top: 20px;" ng-mousedown="csv.generate()" ng-href="{{ csv.link() }}" download="test.csv"><i class="fa fa-file-excel-o"></i> Exportar</a>
 			</div>
 
             <div class="main-box-body clearfix" ng-hide="resultados">

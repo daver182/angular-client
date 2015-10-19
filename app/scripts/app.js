@@ -49,6 +49,11 @@ angular
 				url: '/',
 				templateUrl: '/views/main.html',
 				controller: 'MainCtrl'
+			})
+			.state('home.perfil', {
+				url: '/perfil',
+				templateUrl: '/views/perfil.html',
+				controller: 'PerfilCtrl'
 			});
 
 		$stateProvider
@@ -61,6 +66,11 @@ angular
 				url: '/logout',
 				template: null,
 				controller: 'LogoutCtrl'
+			})
+			.state('forgot', {
+				url: '/forgot',
+				templateUrl: '/views/auth/forgot.html',
+				controller: 'ForgotCtrl'
 			});
 
 		$stateProvider.state('home.forbidden', {
@@ -249,6 +259,10 @@ angular
 				return false;
 			}
 
+			if(config.url.match(/http:\/\/preview.snh7fujp32384cxrlmffilcvx3q2rzfrd95a1oi3qlgqr529.box.codeanywhere.com\/public\/trabajador\/buscar/)){
+				return false;
+			}
+
 			if(config.url.match(/http:\/\/preview.snh7fujp32384cxrlmffilcvx3q2rzfrd95a1oi3qlgqr529.box.codeanywhere.com\/public\/faena\/buscar/)){
 				return false;
 			}
@@ -279,8 +293,10 @@ angular
 			if(toState.name === 'login') return;
 
 			if (!$auth.isAuthenticated()) {
-				e.preventDefault();
-				$state.go('login');
+				if(toState.name !== 'forgot') {
+					e.preventDefault();
+					$state.go('login');
+				}
 			}else{
 				if(toState.name === 'login') {
 					e.preventDefault();

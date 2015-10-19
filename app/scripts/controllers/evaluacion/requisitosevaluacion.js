@@ -10,11 +10,13 @@
 angular.module('seedApp').controller('RequisitosevaluacionCtrl', function ($scope, $stateParams, Trabajador, Evaluacion, Requisito, Estadorequisito, $http, $state, Toast, Upload, notificationService) {
     if($stateParams.id){
 		$scope.evaluacion = Evaluacion.get({ id: $stateParams.id }, function(){
-			console.log($scope.evaluacion.trabajador.fecha_nacimiento);
-			var fechaNacimiento = new Date($scope.evaluacion.trabajador.fecha_nacimiento.split('/')[2], $scope.evaluacion.trabajador.fecha_nacimiento.split('/')[1], $scope.evaluacion.trabajador.fecha_nacimiento.split('/')[0]);
-			var hoy = new Date();
+			$scope.trabajador = Trabajador.get({ id:  $scope.evaluacion.trabajadorId }, function(){
+				var fechaNacimiento = new Date($scope.trabajador.fecha_nacimiento);
+				var hoy = new Date();
 
-			$scope.evaluacion.trabajador.edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+				$scope.trabajador.edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+			});
+			
 			$scope.requisitosEvaluacion = Evaluacion.verRequisitos({ id: $scope.evaluacion.id }, function(a){});
 			$scope.requisitos = Requisito.query();
 			$scope.estadoRequisito = Estadorequisito.query();
@@ -32,7 +34,8 @@ angular.module('seedApp').controller('RequisitosevaluacionCtrl', function ($scop
 			estado: '1',
 			archivoSeleccionado: false,
 			subido: false,
-			vigencia: today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear()
+			//vigencia: today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear()
+			//vigencia: new Date()
 		})
 	}
 
@@ -152,7 +155,7 @@ angular.module('seedApp').controller('RequisitosevaluacionCtrl', function ($scop
 	$scope.subirAvatar = function(files, e){
 		if(files.length !== 0){
 			$scope.avatar.upload = Upload.upload({
-				url: window.URL + '/trabajador/' + $scope.evaluacion.trabajador.id + '/avatar',
+				url: window.URL + '/trabajador/' + $scope.trabajador.id + '/avatar',
 				file: files[0]
 			});
 
@@ -163,7 +166,7 @@ angular.module('seedApp').controller('RequisitosevaluacionCtrl', function ($scop
 			$scope.avatar.upload.success(function(evt) {
 				$scope.avatar.subiendo = false;
 				var random = (new Date()).toString();
-   				$scope.evaluacion.trabajador.imagen = evt.imagen + "?cb=" + random;
+   				$scope.trabajador.imagen = evt.imagen + "?cb=" + random;
 			});
 		}
 	}

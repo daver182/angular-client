@@ -7,14 +7,13 @@
  * # Evaluacion
  * Service in the seedApp.
  */
-angular.module('seedApp').service('Evaluacion', function ($resource) {
-	return $resource(
+angular.module('seedApp').service('Evaluacion', function (Resource) {
+	return Resource(
 		window.URL + '/evaluacion/:id', 
 		{id:'@id'},
 		{
 			query: { method: 'GET', isArray: false },
 			resumen: { method:'GET', isArray: false, url: window.URL + '/evaluacion/resumen' },
-			update: { method: 'PUT', isArray: false },
 			verRequisitos: { method:'GET', params: { id: '@id' }, isArray: true, url: window.URL + '/evaluacion/:id/requisitos' },
 			guardarRequisito: { method:'POST', params: { id: '@id' }, isArray: true, url: window.URL + '/evaluacion/:id/requisitos' },
 			borrarRequisito: { method:'DELETE', params: { id: '@id' }, isArray: true, url: window.URL + '/evaluacion/:id/requisitos/:idRequisitoEvaluacion' },
